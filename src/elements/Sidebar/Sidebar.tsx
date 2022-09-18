@@ -15,7 +15,7 @@ export function Sidebar() {
             <NavLink to='/'>
               <Card type='logoCard'>
                 <img src={logoCard} alt='astro-focus-kit-logo' />
-                <h1>Astro Focus Kit</h1>
+                <h1>ASTRO FOCUS KIT</h1>
                 <img src={logoCard} alt='astro-focus-kit-logo' />
               </Card>
             </NavLink>
@@ -29,24 +29,24 @@ export function Sidebar() {
           </li>
           <li>
             <NavLink to='/tasks'>
-              <Option title='Tasks' />
+              <Option title='TASKS' />
             </NavLink>
           </li>
           <li>
             <NavLink to='/journal'>
-              <Option title='Journal' />
+              <Option title='JOURNAL' />
             </NavLink>
           </li>
         </div>
         <div className={style.sidebarChunk}>
           <li>
             <NavLink to='/settings'>
-              <Option title='Settings' />
+              <Option title='SETTINGS' />
             </NavLink>
           </li>
           <li>
             <NavLink to='/view'>
-              <Option title='View' />
+              <Option title='VIEW' />
             </NavLink>
           </li>
         </div>
