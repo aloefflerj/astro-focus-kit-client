@@ -2,9 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import { User } from './components/User';
 import axios from 'axios';
 import { EnvironmentConfig } from './config/environmentConfig';
-import { Link } from 'react-router-dom'
 
-import { Router } from './routes/Router'
+import './App.css';
+import style from './App.module.scss'
+import { Router } from './routes/Router';
+import { Sidebar } from './elements/Sidebar/Sidebar';
 
 const basePath = EnvironmentConfig.mainServerApiBasePath;
 
@@ -16,23 +18,12 @@ type User = {
 
 function App() {
   return (
-    <>
-      <aside>
-        <ul>
-          <li><Link to='/'>home</Link></li>
-          <li><Link to='/login'>login</Link></li>
-          <li><Link to='/register'>register</Link></li>
-          <li><Link to='/tasks'>tasks</Link></li>
-          <li><Link to='/planet'>planet</Link></li>
-          <li><Link to='/journal'>journal</Link></li>
-          <li><Link to='/settings'>settings</Link></li>
-          <li><Link to='/note'>note</Link></li>
-        </ul>
-      </aside>
-      <main>
+    <div className={false ? style.retracted : style.app}>
+      <Sidebar />
+      <main className={style.main}>
         <Router />
       </main>
-    </>
+    </div>
   );
   // const { data, isFetching } = useQuery<User[]>(['users'], async () => {
   //   const response = await axios.get(`${basePath}/users`)

@@ -1,0 +1,24 @@
+.app {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: 64px 1fr;
+    grid-template-areas:
+      'sidebar main'
+      'sidebar main';
+    width: 100%;
+    height: 100%;
+}
+
+.retracted {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "main"
+        "main"
+        "main";
+}
+
+main.main {
+    grid-area: main;
+    width: 100%;
+    height: 100%;
+}
