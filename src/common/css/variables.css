@@ -1,3 +1,35 @@
+@font-face {
+  font-family: 'Averia Libre';
+  src: url('../../assets/fonts/AveriaLibre-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Averia Libre';
+  src: url('../../assets/fonts/AveriaLibre-Bold.ttf');
+  font-weight: bold;
+  font-style: italic, oblique;
+
+}
+
+@font-face {
+  font-family: 'Averia Libre';
+  src: url('../../assets/fonts/AveriaLibre-Light.ttf');
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: 'Averia Libre';
+  src: url('../../assets/fonts/AveriaLibre-Italic.ttf');
+  font-style: italic, oblique;
+}
+
+/* @font-face {
+  font-family: 'Averia Libre';
+  src: url('../../assets/fonts/AveriaLibre-BoldItalic.ttf');
+  font-weight: bold;
+  font-style: italic, oblique;
+} */
+
 :root {
   --coral-light: #f1e6d4;
   --coral-medium: #f0c8ac;
@@ -9,4 +41,6 @@
   --green-medium: #94cea7;
 
   --card-radius: 0.16em;
+
+  --default-font-medium: 'Averia Libre', cursive;
 }

@@ -2,7 +2,8 @@ import { NavLink } from 'react-router-dom';
 import { Option } from './Option';
 import { Card } from '../../components/Card/Card';
 
-import characterImg from '../../assets/char.png'
+import characterImg from '../../assets/img/char.png';
+import logoCard from '../../assets/img/logo-star.svg';
 import style from './Sidebar.module.scss';
 
 export function Sidebar() {
@@ -11,10 +12,19 @@ export function Sidebar() {
       <ul>
         <div className={style.sidebarChunk}>
           <li>
+            <NavLink to='/'>
+              <Card type='logoCard'>
+                <img src={logoCard} alt='astro-focus-kit-logo' />
+                <h1>Astro Focus Kit</h1>
+                <img src={logoCard} alt='astro-focus-kit-logo' />
+              </Card>
+            </NavLink>
+          </li>
+          <li>
             <NavLink to='/planet'>
-                <Card type='imageOptionCard'>
-                    <img src={characterImg} alt="character-img"/>
-                </Card>
+              <Card type='imageOptionCard'>
+                <img src={characterImg} alt='character-img' />
+              </Card>
             </NavLink>
           </li>
           <li>
