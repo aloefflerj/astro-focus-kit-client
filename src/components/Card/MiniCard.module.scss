@@ -1,0 +1,57 @@
+@import '../../common/css/variables.css';
+
+.miniCard {
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: var(--card-radius);
+    background: var(--black-medium);
+    font-family: var(--default-font);
+    position: absolute;
+    top: 50px;
+}
+
+.miniCardTop {
+    display: block;
+    box-sizing: border-box;
+    border: 2px solid var(--black-medium);
+    border-radius: var(--card-radius);
+    padding: 0.75em 1.5em;
+    color: var(--black-medium);
+    transform: translateY(-0.2em);
+    transition: transform 0.1s ease;
+    padding: 1px 6px;
+    text-align: center;
+}
+
+.star {
+    background: var(--yellow-medium);
+}
+
+.box {
+    background: var(--coral-light);
+}
+
+.miniCard:hover .miniCardTop {
+    transform: translateY(-0.33em);
+}
+
+.miniCard:active .miniCardTop {
+    transform: translateY(0);
+}
+
+.miniCardStar {
+    position: absolute;
+    top: 33px;
+    text-align: center;
+    img {
+        height: 72px;
+        width: auto;
+    }
+    & p {
+        position: absolute;
+        top: 15%;
+        left: 49.5%;
+        transform: translate(-50%, -50%);
+    }
+}

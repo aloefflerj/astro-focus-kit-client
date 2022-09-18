@@ -1,5 +1,7 @@
+import { Week } from "../components/Week/Week";
+
 export function TasksPage() {
     return (
-        <h1>Tasks</h1>
+        <Week />
     )
 }

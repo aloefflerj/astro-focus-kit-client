@@ -8,7 +8,7 @@
     background: var(--black-medium);
     font-family: var(--default-font);
 }
-  
+
 .cardTop {
     display: block;
     box-sizing: border-box;
@@ -20,6 +20,17 @@
     transition: transform 0.1s ease;
     padding: 20px 30px;
     text-align: center;
+
+    &.weekDayCard {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &.logoCard {
+        display: flex;
+    }
 }
 
 :global {
@@ -32,28 +43,46 @@
         &.taskCard {
             background: var(--coral-dark);
         }
+
+        &.imageOptionCard {
+            transform: translateY(-0.33em);
+        }
     }
-    
+
+    .active.weekDayCard {
+        transform: translateY(-0.33em);
+    }
+
+    .active.logoCard {
+        transform: translateY(-0.33em);
+    }
+
+    .active.weekDayCard div span {
+        transform: translateY(-0.33em);
+    }
 }
 
 .optionsCard {
     background: var(--coral-light);
+
     &:hover {
         background: var(--coral-medium);
     }
 }
 
 .imageOptionCard {
-    background-color: var(--black-medium);
+    background-color: var(--coral-light);
     padding: 0;
+    display: flex;
 }
 
 .taskCard {
     background: var(--coral-medium);
+
     &:hover {
         background: var(--coral-dark);
     }
-    
+
 }
 
 .logoCard {
@@ -63,10 +92,13 @@
     text-shadow: 0 2px var(--black-medium);
     padding: 0;
     display: flex;
+    transform: translateY(-0.33em);
+
     img {
         object-fit: contain;
         width: 40px;
     }
+
     h1 {
         margin: 8px 0;
     }
@@ -74,10 +106,12 @@
 
 .weekDayCard {
     background: var(--coral-dark);
+    padding: 20px 6px;
 }
 
 .default {
     background: var(--coral-light);
+
     &:hover {
         background: var(--coral-medium);
     }
@@ -85,8 +119,19 @@
 
 .card:hover .cardTop {
     transform: translateY(-0.33em);
+
+    &.logoCard {
+        transform: translateY(-0.50em);
+    }
+
+    & div span {
+        transform: translateY(-0.33em);
+    }
+
 }
 
 .card:active .cardTop {
-    transform: translateY(0);
+    &:not(.weekDayCard) {
+        transform: translateY(0);
+    }
 }

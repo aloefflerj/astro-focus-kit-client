@@ -3,7 +3,7 @@ import { Option } from './Option';
 import { Card } from '../../components/Card/Card';
 
 import characterImg from '../../assets/img/char.png';
-import logoCard from '../../assets/img/logo-star.svg';
+import logoCard from '../../assets/img/star.svg';
 import style from './Sidebar.module.scss';
 
 export function Sidebar() {
