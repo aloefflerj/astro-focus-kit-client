@@ -22,7 +22,7 @@ function App() {
           <li><Link to='/'>home</Link></li>
           <li><Link to='/login'>login</Link></li>
           <li><Link to='/register'>register</Link></li>
-          <li><Link to='/dashboard'>dashboard</Link></li>
+          <li><Link to='/tasks'>tasks</Link></li>
           <li><Link to='/planet'>planet</Link></li>
           <li><Link to='/journal'>journal</Link></li>
           <li><Link to='/settings'>settings</Link></li>
