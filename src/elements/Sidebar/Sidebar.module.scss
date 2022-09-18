@@ -1,6 +1,42 @@
+:global {
+    aside.sidebar {
+        width: 800px;
+    }
+
+    img {
+        width: 100%;
+        object-fit: cover;    
+    }
+}
+
 aside.sidebar {
     grid-area: sidebar;
-    background-color: lightgreen;
+    // background-color: lightgreen;
     width: 100%;
     height: 100%;
+}
+
+aside.sidebar ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    // gap: 12px;
+    height: calc(100vh - 24px);
+}
+
+aside.sidebar li {
+    padding-bottom: 12px;
+}
+
+aside .sidebarChunk {
+    display: flex;
+    flex-direction: column;
+    // flex-wrap: wrap;
+}
+
+aside.sidebar a.active {
+    position: absolute;
+    color: rebeccapurple;
+    background-color: royalblue;
 }

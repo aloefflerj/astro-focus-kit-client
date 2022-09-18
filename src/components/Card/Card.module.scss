@@ -1,0 +1,84 @@
+@import '../../common/css/variables.css';
+
+.card {
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    border-radius: var(--card-radius);
+    background: var(--black-medium);
+    // padding: 10px 20px;
+}
+  
+.cardTop {
+    display: block;
+    box-sizing: border-box;
+    border: 2px solid var(--black-medium);
+    border-radius: var(--card-radius);
+    padding: 0.75em 1.5em;
+    // background: var(--coral-medium);
+    color: var(--black-medium);
+    transform: translateY(-0.2em);
+    transition: transform 0.1s ease;
+    padding: 20px 30px;
+}
+
+:global {
+    .active div span {
+        &.optionColor {
+            background: var(--coral-medium);
+            transform: translateY(-0.33em);
+        }
+
+        &.taskColor {
+            background: var(--coral-dark);
+        }
+    }
+    
+}
+
+.optionColor {
+    background: var(--coral-light);
+    &:hover {
+        background: var(--coral-medium);
+    }
+}
+
+.optionPlanetColor {
+    background-color: var(--black-medium);
+    padding: 0;
+}
+
+.taskColor {
+    background: var(--coral-medium);
+    &:hover {
+        background: var(--coral-dark);
+    }
+    
+}
+
+.logoColor {
+    background: var(--blue-medium);
+}
+
+.weekDayColor {
+    background: var(--coral-dark);
+}
+
+.default {
+    background: var(--coral-light);
+    &:hover {
+        background: var(--coral-medium);
+    }
+}
+
+// a .optionColor:link {
+//     background: var(--coral-dark);
+// }
+
+.card:hover .cardTop {
+    transform: translateY(-0.33em);
+}
+
+.card:active .cardTop {
+    transform: translateY(0);
+}

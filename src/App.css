@@ -6,6 +6,17 @@ body {
   background-color: var(--coral-light);
 }
 
+ul,
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
 #root {
   width: 100%;
   height: 100%;

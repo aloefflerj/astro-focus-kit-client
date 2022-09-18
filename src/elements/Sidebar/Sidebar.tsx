@@ -1,20 +1,50 @@
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import { Option } from './Option';
+import { Card } from '../../components/Card/Card';
 
-import styles from './Sidebar.module.scss'
+import characterImg from '../../assets/char.png'
+import style from './Sidebar.module.scss';
 
 export function Sidebar() {
-    return (
-        <aside className={styles.sidebar}>
-            <ul>
-                <li><Link to='/'>home</Link></li>
-                <li><Link to='/login'>login</Link></li>
-                <li><Link to='/register'>register</Link></li>
-                <li><Link to='/tasks'>tasks</Link></li>
-                <li><Link to='/planet'>planet</Link></li>
-                <li><Link to='/journal'>journal</Link></li>
-                <li><Link to='/settings'>settings</Link></li>
-                <li><Link to='/note'>note</Link></li>
-            </ul>
-      </aside>
-    )
+  return (
+    <aside className={style.sidebar}>
+      <ul>
+        <div className={style.sidebarChunk}>
+          <li>
+            <NavLink to='/planet'>
+                <Card color='optionPlanetColor'>
+                    <img src={characterImg} alt="sd"/>
+                </Card>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/tasks'>
+              <Option title='Tasks' />
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/journal'>
+              <Option title='Journal' />
+            </NavLink>
+          </li>
+        </div>
+        {/* <li><NavLink to='/'><Card /></NavLink></li>
+                <li><NavLink to='/login'>login</NavLink></li>
+                <li><NavLink to='/register'>register</NavLink></li>
+                <li><NavLink to='/note'>note</NavLink></li> */}
+        <div className={style.sidebarChunk}>
+          <li>
+            <NavLink to='/settings'>
+              <Option title='Settings' />
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/view'>
+              <Option title='View' />
+            </NavLink>
+          </li>
+        </div>
+      </ul>
+    </aside>
+  );
 }
