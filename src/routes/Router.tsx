@@ -1,9 +1,9 @@
-import { Routes, Route, Outlet, Link } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 export function Router() {
   return (
     <Routes>
-      <Route path='/' element={<h1>home</h1>} />
+      <Route path='/' element={<Navigate replace to="/tasks" />} />
       <Route path='/login' element={<h1>login</h1>} />
       <Route path='/register' element={<h1>register</h1>} />
       <Route path='/tasks' element={<h1>tasks</h1>} />

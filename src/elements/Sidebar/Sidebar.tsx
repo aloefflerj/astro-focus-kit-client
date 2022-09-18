@@ -12,8 +12,8 @@ export function Sidebar() {
         <div className={style.sidebarChunk}>
           <li>
             <NavLink to='/planet'>
-                <Card color='optionPlanetColor'>
-                    <img src={characterImg} alt="sd"/>
+                <Card type='imageOptionCard'>
+                    <img src={characterImg} alt="character-img"/>
                 </Card>
             </NavLink>
           </li>
@@ -28,10 +28,6 @@ export function Sidebar() {
             </NavLink>
           </li>
         </div>
-        {/* <li><NavLink to='/'><Card /></NavLink></li>
-                <li><NavLink to='/login'>login</NavLink></li>
-                <li><NavLink to='/register'>register</NavLink></li>
-                <li><NavLink to='/note'>note</NavLink></li> */}
         <div className={style.sidebarChunk}>
           <li>
             <NavLink to='/settings'>
