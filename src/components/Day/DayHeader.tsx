@@ -1,5 +1,6 @@
 import { Card } from '../Card/Card'
 import { MiniCard } from "../Card/MiniCard";
+import { CardFooter } from "../Card/CardFooter";
 
 interface Props {
     title: 'SUNDAY' | 'MONDAY' | 'THUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY',
@@ -12,9 +13,11 @@ export function DayHeader({title, today}: Props) {
     return (
         <Card type='dayHeader'>
             {title}
-            <MiniCard type={todayCard} >
-                28
-            </MiniCard>
+            <CardFooter type='dayHeader'>
+                <MiniCard type={todayCard} >
+                    28
+                </MiniCard>
+            </CardFooter>
         </Card>
     )
 }

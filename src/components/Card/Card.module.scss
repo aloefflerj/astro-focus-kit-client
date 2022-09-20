@@ -61,6 +61,7 @@
         &.task {
             background: var(--coral-medium);
             cursor: grab;
+            padding: 12px 10px;
         }
 
     }
@@ -101,6 +102,9 @@
             &.task {
                 cursor: grabbing;
                 transform: translateY(-0.24em);
+                & div span {
+                    transform: translateY(-0.24em);
+                }
             }
         }
     }

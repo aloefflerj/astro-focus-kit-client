@@ -7,8 +7,6 @@
     border-radius: var(--card-radius);
     background: var(--black-medium);
     font-family: var(--default-font);
-    position: absolute;
-    top: 50px;
 }
 
 .miniCardTop {
@@ -20,7 +18,7 @@
     color: var(--black-medium);
     transform: translateY(-0.2em);
     transition: transform 0.1s ease;
-    padding: 1px 6px;
+    padding: 0 4px;
     text-align: center;
 }
 
@@ -42,16 +40,21 @@
 
 .miniCardStar {
     position: absolute;
-    top: 33px;
+    top: -18px;
     text-align: center;
     img {
-        height: 72px;
+        height: 64px;
         width: auto;
     }
     & p {
         position: absolute;
-        top: 15%;
-        left: 49.5%;
-        transform: translate(-50%, -50%);
+        top: -3.5px;
+        left: 0;
+        right: 0;
+        margin-left: auto; 
+        margin-right: auto; 
+    // width: 100%;
+        // left: 49.7%;
+        // transform: translate(-50%, -50%);
     }
 }
