@@ -6,5 +6,5 @@ interface Props {
 }
 
 export function Option({ title }: Props) {
-  return <Card type='optionsCard'>{title}</Card>;
+  return <Card type='option'>{title}</Card>;
 }
