@@ -7,131 +7,107 @@
     border-radius: var(--card-radius);
     background: var(--black-medium);
     font-family: var(--default-font);
-}
 
-.cardTop {
-    display: block;
-    box-sizing: border-box;
-    border: 2px solid var(--black-medium);
-    border-radius: var(--card-radius);
-    padding: 0.75em 1.5em;
-    color: var(--black-medium);
-    transform: translateY(-0.2em);
-    transition: transform 0.1s ease;
-    padding: 20px 30px;
-    text-align: center;
+    .cardTop {
+        display: block;
+        box-sizing: border-box;
+        border: 2px solid var(--black-medium);
+        border-radius: var(--card-radius);
+        padding: 0.75em 1.5em;
+        color: var(--black-medium);
+        transform: translateY(-0.2em);
+        transition: transform 0.1s ease;
+        padding: 20px 30px;
+        text-align: center;
 
-    &.weekDayCard {
-        justify-content: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    &.logoCard {
-        display: flex;
-    }
-}
-
-:global {
-    .active div span {
-        &.optionsCard {
-            background: var(--coral-medium);
+        &.logo {
+            background: var(--blue-medium);
+            color: #e6e8ef;
+            font-size: 14px;
+            text-shadow: 0 2px var(--black-medium);
+            padding: 0;
+            display: flex;
             transform: translateY(-0.33em);
+
+            img {
+                object-fit: contain;
+                width: 40px;
+            }
+
+            h1 {
+                margin: 8px 0;
+            }
         }
 
-        &.taskCard {
+        &.option {
+            background-color: var(--coral-light);
+        }
+
+        &.planetOption {
+            background-color: var(--coral-light);
+            padding: 0;
+            display: flex;
+        }
+
+        &.dayHeader {
             background: var(--coral-dark);
+            padding: 20px 6px;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        &.imageOptionCard {
+        &.task {
+            background: var(--coral-medium);
+            cursor: grab;
+        }
+
+    }
+
+    &:hover {
+        .cardTop {
             transform: translateY(-0.33em);
+
+            &.logo {
+                transform: translateY(-0.50em);
+            }
+
+            &.option {
+                background: var(--coral-medium);
+            }
+
+            &.task {
+                background: var(--coral-dark);
+            }
+
+            & div span {
+                transform: translateY(-0.33em);
+            }
         }
     }
 
-    .active.weekDayCard {
-        transform: translateY(-0.33em);
-    }
+    &:active {
+        &.task {
+            cursor: grabbing;
+            transform: translateY(-0.18em);
+        }
 
-    .active.logoCard {
-        transform: translateY(-0.33em);
-    }
+        .cardTop {
+            &:not(.dayHeader, .task) {
+                transform: translateY(0);
+            }
 
-    .active.weekDayCard div span {
-        transform: translateY(-0.33em);
-    }
-}
-
-.optionsCard {
-    background: var(--coral-light);
-
-    &:hover {
-        background: var(--coral-medium);
+            &.task {
+                cursor: grabbing;
+                transform: translateY(-0.24em);
+            }
+        }
     }
 }
 
-.imageOptionCard {
-    background-color: var(--coral-light);
-    padding: 0;
-    display: flex;
-}
-
-.taskCard {
-    background: var(--coral-medium);
-
-    &:hover {
-        background: var(--coral-dark);
-    }
-
-}
-
-.logoCard {
-    background: var(--blue-medium);
-    color: #e6e8ef;
-    font-size: 14px;
-    text-shadow: 0 2px var(--black-medium);
-    padding: 0;
-    display: flex;
-    transform: translateY(-0.33em);
-
-    img {
-        object-fit: contain;
-        width: 40px;
-    }
-
-    h1 {
-        margin: 8px 0;
-    }
-}
-
-.weekDayCard {
-    background: var(--coral-dark);
-    padding: 20px 6px;
-}
-
-.default {
-    background: var(--coral-light);
-
-    &:hover {
-        background: var(--coral-medium);
-    }
-}
-
-.card:hover .cardTop {
-    transform: translateY(-0.33em);
-
-    &.logoCard {
-        transform: translateY(-0.50em);
-    }
-
-    & div span {
-        transform: translateY(-0.33em);
-    }
-
-}
-
-.card:active .cardTop {
-    &:not(.weekDayCard) {
-        transform: translateY(0);
+:global(.active) {
+    :local(span.option) {
+        background: var(--coral-medium) !important;
     }
 }
