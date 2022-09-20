@@ -1,3 +1,5 @@
+@import '../../common/css/variables.css';
+
 :global {
     aside.sidebar {
         width: 800px;
@@ -5,7 +7,7 @@
 
     img {
         width: 100%;
-        object-fit: cover;    
+        object-fit: cover;
     }
 }
 
@@ -30,10 +32,4 @@ aside.sidebar li {
 aside .sidebarChunk {
     display: flex;
     flex-direction: column;
-}
-
-aside.sidebar a.active {
-    position: absolute;
-    color: rebeccapurple;
-    background-color: royalblue;
 }
