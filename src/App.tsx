@@ -8,6 +8,8 @@ import { Router } from './routes/Router';
 import { Sidebar } from './elements/Sidebar/Sidebar';
 
 const basePath = EnvironmentConfig.mainServerApiBasePath;
+const appTitle = import.meta.env.VITE_APP_TITLE
+document.title = appTitle
 
 type User = {
   id: number;
