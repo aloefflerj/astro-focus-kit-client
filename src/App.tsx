@@ -1,6 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
-import { User } from './components/User';
-import axios from 'axios';
 import { EnvironmentConfig } from './config/environmentConfig';
 
 import style from './App.module.scss'
@@ -8,8 +5,6 @@ import { Router } from './routes/Router';
 import { Sidebar } from './elements/Sidebar/Sidebar';
 
 const basePath = EnvironmentConfig.mainServerApiBasePath;
-const appTitle = import.meta.env.VITE_APP_TITLE
-document.title = appTitle
 
 type User = {
   id: number;
@@ -26,28 +21,6 @@ function App() {
       </main>
     </div>
   );
-  // const { data, isFetching } = useQuery<User[]>(['users'], async () => {
-  //   const response = await axios.get(`${basePath}/users`)
-
-  //   console.log(response.data)
-  //   return response.data
-  // })
-
-  // return (
-  //   <ul>
-  //     {isFetching && <p>Carregando...</p>}
-  //     {data?.map((user, index) => {
-  //       return (
-  //         <User
-  //           key={index}
-  //           id={user.id}
-  //           name={user.username}
-  //           mail={user.mail}
-  //         />
-  //       )
-  //     })}
-  //   </ul>
-  // )
 }
 
 export default App;

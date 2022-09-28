@@ -5,9 +5,5 @@ interface Props {
 }
 
 export function TaskList({ children }: Props) {
-  return (
-    <ul className={style.taskList}>
-      {children}
-    </ul>
-  );
+  return <ul className={style.taskList}>{children}</ul>;
 }

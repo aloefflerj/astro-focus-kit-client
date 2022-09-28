@@ -1,23 +1,22 @@
-import { Card } from '../Card/Card'
-import { MiniCard } from "../Card/MiniCard";
-import { CardFooter } from "../Card/CardFooter";
+import { Card } from '../Card/Card';
+import { MiniCard } from '../Card/MiniCard';
+import { CardFooter } from '../Card/CardFooter';
 
 interface Props {
-    title: 'SUNDAY' | 'MONDAY' | 'THUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY',
-    today: boolean
+  weekDay: string;
+  monthDay: string;
+  today: boolean;
 }
 
-export function DayHeader({title, today}: Props) {
-    const todayCard = today === true ? 'star' : 'box';
-    
-    return (
-        <Card type='dayHeader'>
-            {title}
-            <CardFooter type='dayHeader'>
-                <MiniCard type={todayCard} >
-                    28
-                </MiniCard>
-            </CardFooter>
-        </Card>
-    )
+export function DayHeader({ weekDay, monthDay, today }: Props) {
+  const todayCard = today === true ? 'star' : 'box';
+
+  return (
+    <Card type='dayHeader'>
+      {weekDay}
+      <CardFooter type='dayHeader'>
+        <MiniCard type={todayCard}>{monthDay}</MiniCard>
+      </CardFooter>
+    </Card>
+  );
 }
