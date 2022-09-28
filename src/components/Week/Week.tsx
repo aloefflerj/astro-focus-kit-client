@@ -61,29 +61,49 @@ export function Week() {
     let tasksBySourceDay = filterTasks(tasks, fromWeekDay);
     const grabbedTask = tasksBySourceDay ? tasksBySourceDay.find(({order}) => order === source.index) : null;
     
-    if (tasksBySourceDay) {
-      tasksBySourceDay.splice(source.index, 1);
-    }
-
     if (grabbedTask === null || grabbedTask === undefined || fromWeekDay === undefined) {
       return;
     }
+
+    let updatedTasks = tasks.map((task) => {
+      if (grabbedTask.id !== task.id && fromWeekDay.date === task.registerDate) {
+        if (task.order > grabbedTask.order)
+          task.order--;
+      }
+      return task;
+    })
+
 
     const toWeekDay: IDay | undefined = weekDays.find(
       ({ id }) => id === destination.droppableId
     ); 
 
+    if (toWeekDay === undefined)
+      return;
+
     let tasksByDestinationDay = filterTasks(tasks, toWeekDay);
+    if (tasksByDestinationDay?.length === 0) {
+      grabbedTask.registerDate = toWeekDay.date;
+      grabbedTask.order = destination.index;
+      const newTasks = tasks.map((task) => {
+        if (task.id === grabbedTask.id)
+          return grabbedTask;
+
+        return task;
+      })
+      setTasks(newTasks);
+    }
+    
     const draggedToIndexDay = tasksByDestinationDay ? tasksByDestinationDay.find(({order}) => order === destination.index) : null;
 
-    if (draggedToIndexDay === null || draggedToIndexDay === undefined || toWeekDay === undefined || tasksByDestinationDay === undefined) {
+    if (draggedToIndexDay === null || draggedToIndexDay === undefined || tasksByDestinationDay === undefined) {
       return;
     }
 
     grabbedTask.registerDate = toWeekDay.date;
     grabbedTask.order = destination.index;
 
-    const updatedTasks = tasks.map((task: ITask) => {
+    updatedTasks = tasks.map((task: ITask) => {
 
       if (task.registerDate === toWeekDay.date) {
         if (task.id === grabbedTask.id) return grabbedTask;

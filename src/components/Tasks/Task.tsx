@@ -22,7 +22,8 @@ export function Task({ index, id, title }: { index: number; id: string, title: s
                 ...
               </MiniCard>
               <MiniCard active={false} type='box'>
-                &nbsp;&nbsp;&nbsp;
+                {/* &nbsp;&nbsp;&nbsp; */}
+                {index}
               </MiniCard>
             </CardFooter>
           </Card>
