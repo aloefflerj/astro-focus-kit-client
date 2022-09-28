@@ -98,7 +98,7 @@ export function Week() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      {isFetchingTasks && <h1>Loading tasks...</h1>}
+      {isFetchingTasks && ''}
       <div className={style.week}>
         {weekDays.map(day => (
           <Day
