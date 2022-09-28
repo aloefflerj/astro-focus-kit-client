@@ -64,7 +64,7 @@ export function Week() {
     if (tasksBySourceDay) {
       tasksBySourceDay.splice(source.index, 1);
     }
-    
+
     if (grabbedTask === null || grabbedTask === undefined || fromWeekDay === undefined) {
       return;
     }
@@ -94,46 +94,6 @@ export function Week() {
     });
 
     setTasks(updatedTasks);
-
-    // tasksByDestinationDay.splice(destination.index, 0, grabbedTask);
-
-    // console.log(tasksByDestinationDay);
-
-    // const updatedTasks: ITask[] = [];
-    // tasks.forEach((task: ITask, index: number) => {
-    //   if (!tasksByDestinationDay?.includes(task)) {
-    //     updatedTasks[index] = task;
-
-    //   }
-    // })
-    // const updatedTasks = tasks.filter((task) => {if (!tasksByDestinationDay?.includes(task)) return task} )
-    // tasksByDestinationDay.map((task, index) => tasks.splice(index, 1));
-    // const filteredUpdatedTasks = filterTasks(updatedTasks, toWeekDay);
-    // if (filteredUpdatedTasks === undefined)
-    //   return;
-  
-    // console.log(updatedTasks);
-    // setTasks([...tasksByDestinationDay, ...updatedTasks]);
-    // console.log(tasks)
-
-
-    // const grabbedTask = tasks[source.index];
-    // console.log(tasks);
-    // console.log(source.index);
-    // console.log(grabbedTask);
-    // const dayColumn: IDay = weekDays[source.index];
-    // console.log(dayColumn);
-    // const newTaskIds = Array.from(dayColumn.id);
-    // console.log(newTaskIds);
-    // newTaskIds.splice(source.index, 1);
-    // newTaskIds.splice(destination.index, 0, draggableId);
-
-    // const newColumn = {
-    //   ...dayColumn,
-    //   tasks: newTaskIds,
-    // };
-
-    // setTasks(newColumn);
   };
 
   return (
