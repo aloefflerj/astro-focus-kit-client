@@ -83,23 +83,20 @@ export function Week() {
 
     let tasksByDestinationDay = filterTasks(tasks, toWeekDay);
     if (tasksByDestinationDay?.length === 0) {
+      
       grabbedTask.registerDate = toWeekDay.date;
       grabbedTask.order = destination.index;
+      
       const newTasks = tasks.map((task) => {
         if (task.id === grabbedTask.id)
           return grabbedTask;
 
         return task;
       })
+      
       setTasks(newTasks);
     }
     
-    const draggedToIndexDay = tasksByDestinationDay ? tasksByDestinationDay.find(({order}) => order === destination.index) : null;
-
-    if (draggedToIndexDay === null || draggedToIndexDay === undefined || tasksByDestinationDay === undefined) {
-      return;
-    }
-
     grabbedTask.registerDate = toWeekDay.date;
     grabbedTask.order = destination.index;
 
