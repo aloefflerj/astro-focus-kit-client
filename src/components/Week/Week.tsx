@@ -16,14 +16,22 @@ const weekDays = currentWeekDays();
 export function Week() {
   const [tasks, setTasks] = useState<ITask[]>([]);
 
-  const { data: queriedTasks, isFetching: isFetchingTasks } = useQuery<ITask[]>(
-    ['tasks'],
-    async () => {
-      const response = await axios.get(`${basePath}/tasks`);
-      return response.data;
-    },
-    { onSuccess: queriedTasks => setTasks(queriedTasks) }
-  );
+  // const { data: queriedTasks, isFetching: isFetchingTasks } = useQuery<ITask[]>(
+  //   ['tasks'],
+  //   async () => {
+  //     const response = await axios.get(`${basePath}/tasks`);
+  //     return response.data;
+  //   },
+  //   { onSuccess: queriedTasks => setTasks(queriedTasks) }
+  // );
+  
+  useEffect(() => {
+    const getTasks = async () => {
+        const response = await axios.get(`${basePath}/tasks`);
+        setTasks(response.data);
+    };
+    getTasks();
+}, []);
 
   const filterTasks = (
     tasks: ITask[] | undefined,
@@ -115,7 +123,7 @@ export function Week() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      {isFetchingTasks && ''}
+      {/* {isFetchingTasks && ''} */}
       <div className={style.week}>
         {weekDays.map(day => (
           <Day

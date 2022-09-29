@@ -9,7 +9,7 @@ import App from './App';
 import { AuthProvider } from './contexts/AuthProvider';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    <QueryClientProvider client={queryClient}>
+    // <QueryClientProvider client={queryClient}>
       <React.StrictMode>
         <AuthProvider>
           <BrowserRouter>
@@ -17,5 +17,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           </BrowserRouter>
         </AuthProvider>
       </React.StrictMode>
-    </QueryClientProvider>
+    // </QueryClientProvider>
 );

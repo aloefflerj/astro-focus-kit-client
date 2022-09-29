@@ -5,7 +5,12 @@ import { AuthContext } from './AuthContext';
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     const [user, setUser] = useState<IUser | null>(null);
+    const [render, setRender] = useState(false);
     const api = useApi();
+
+    useEffect(() => {
+        setRender(true);
+    }, []);
 
     useEffect(() => {
         const validateToken = async () => {
@@ -13,12 +18,14 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
             if (storageData) {
                 const data = await api.validateToken(storageData);
                 if (data) {
-                    setUser(data.user);
+                    setUser(data);
                 }
             }
         };
-        validateToken();
-    }, [api]);
+        if (render === true) {
+            validateToken();
+        }
+    }, [render, api]);
 
     const signin = async (email: string, password: string) => {
         const data = await api.signin(email, password);
