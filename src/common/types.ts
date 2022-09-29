@@ -23,3 +23,9 @@ export interface ITaskDay {
     taskId: string;
     dayId: string;
 }
+
+export interface IUser {
+    id: string;
+    name: string;
+    mail: string;
+}

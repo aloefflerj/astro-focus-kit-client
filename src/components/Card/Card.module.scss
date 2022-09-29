@@ -43,6 +43,12 @@
             background-color: var(--coral-light);
         }
 
+        &.smallOption {
+            background-color: var(--coral-light);
+            padding: 6px 1.5em;
+            cursor: pointer;
+        }
+
         &.planetOption {
             background-color: var(--coral-light);
             padding: 0;

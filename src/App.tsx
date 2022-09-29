@@ -1,10 +1,7 @@
-import { EnvironmentConfig } from './config/environmentConfig';
-
-import style from './App.module.scss'
+import style from './App.module.scss';
 import { Router } from './routes/Router';
-import { Sidebar } from './elements/Sidebar/Sidebar';
-
-const basePath = EnvironmentConfig.mainServerApiBasePath;
+import { useContext } from 'react';
+import { AuthContext } from './contexts/AuthContext';
 
 type User = {
   id: number;
@@ -13,12 +10,10 @@ type User = {
 };
 
 function App() {
+  const auth = useContext(AuthContext);
   return (
-    <div className={false ? style.retracted : style.app}>
-      <Sidebar />
-      <main className={style.main}>
-        <Router />
-      </main>
+    <div className={auth.user ? style.app : style.defaultLayout}>
+      <Router />
     </div>
   );
 }

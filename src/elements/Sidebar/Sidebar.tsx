@@ -1,12 +1,23 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Option } from './Option';
 import { Card } from '../../components/Card/Card'
 
 import characterImg from '../../assets/img/char.png';
 import logoCard from '../../assets/img/star.svg';
 import style from './Sidebar.module.scss';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
+import { MiniCard } from '../../components/Card/MiniCard';
 
 export function Sidebar() {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await auth.signout();
+    navigate('/login');
+  }
+  
   return (
     <aside className={style.sidebar}>
       <ul>
@@ -48,6 +59,11 @@ export function Sidebar() {
             <NavLink to='/view' className='someClass'>
               <Option title='VIEW' />
             </NavLink>
+          </li>
+          <li>
+            <a onClick={handleLogout}>
+              <Option type='small' title='LOGOUT' />
+            </a>
           </li>
         </div>
       </ul>
