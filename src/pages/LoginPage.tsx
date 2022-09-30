@@ -1,17 +1,18 @@
 import React, { useContext, useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
+import { CommonLayoutPage } from './CommonLayoutPage';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthContext';
-import { NormalPageStructure } from './NormalPageStructure';
+import { Option } from '../elements/Sidebar/Option';
+import star from '../assets/img/star.svg';
 
 export const LoginPage = () => {
-    const auth = useContext(AuthContext);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const auth = useAuth();
     const navigate = useNavigate();
 
-    const [mail, setMail] = useState('');
-    const [password, setPassword] = useState('');
-
     const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setMail(e.target.value);
+        setEmail(e.target.value);
     };
 
     const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,30 +20,61 @@ export const LoginPage = () => {
     };
 
     const handleLogin = async () => {
-        if (mail && password) {
-            const isLogged = await auth.signin(mail, password);
-            if (isLogged) {
-                navigate('/tasks');
-            }
+        try {
+            await auth.authenticate(email, password);
+
+            navigate('/tasks');
+        } catch (error) {
+            alert(
+                'Invalid email or password, try: eve.holt@reqres.in and pass: cityslicka'
+            );
         }
     };
-
+    const style = {
+        borderRadius: '4px',
+        border: '2px solid #464651',
+        padding: '8px 10px',
+        fontFamily: 'Averia Libre, cursive',
+        marginTop: '8px',
+        color: '#464651',
+        boxShadow: '0px -3px #464651',
+        backgroundColor: '#f0c8ac',
+        fontSize: '18px',
+    };
     return (
-        <NormalPageStructure>
-            <h1>Login</h1>
+        <CommonLayoutPage>
+            <h1>Bem Vindo</h1>
             <input
+                style={style}
                 type='text'
-                value={mail}
+                value={email}
                 placeholder='Type your email'
                 onChange={handleEmailInput}
             />
             <input
+                style={style}
                 type='password'
                 value={password}
                 placeholder='Type your password'
                 onChange={handlePasswordInput}
             />
-            <button onClick={handleLogin}>Login</button>
-        </NormalPageStructure>
+
+            <button
+                onClick={handleLogin}
+                style={{
+                    background: 'none',
+                    border: 'none',
+                    paddingTop: '12px',
+                }}
+            >
+                <Option type='small' title='LOGIN' />
+            </button>
+            <p>
+                Fake login with mail: <strong>"eve.holt@reqres.in"</strong>
+            </p>
+            <p>
+                And password: <strong>"cityslicka"</strong>
+            </p>
+        </CommonLayoutPage>
     );
 };

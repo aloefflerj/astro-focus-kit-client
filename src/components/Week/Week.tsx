@@ -1,13 +1,14 @@
 import { DragDropContext, DropResult } from '@hello-pangea/dnd';
 import axios from 'axios';
 
-import { IDay, ITask, ITaskDay } from '../../common/types';
+import { IDay, ITask } from '../../common/types';
 import { currentWeekDays } from '../../common/utils/currentWeekDays';
 import { useQuery } from '@tanstack/react-query';
 import { EnvironmentConfig } from '../../config/environmentConfig';
 import { Day } from '../Day/Day';
 import style from './Week.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { api } from '../../services/api';
 
 const basePath = EnvironmentConfig.mainServerApiBasePath;
 
@@ -16,22 +17,14 @@ const weekDays = currentWeekDays();
 export function Week() {
   const [tasks, setTasks] = useState<ITask[]>([]);
 
-  // const { data: queriedTasks, isFetching: isFetchingTasks } = useQuery<ITask[]>(
-  //   ['tasks'],
-  //   async () => {
-  //     const response = await axios.get(`${basePath}/tasks`);
-  //     return response.data;
-  //   },
-  //   { onSuccess: queriedTasks => setTasks(queriedTasks) }
-  // );
-  
-  useEffect(() => {
-    const getTasks = async () => {
-        const response = await axios.get(`${basePath}/tasks`);
-        setTasks(response.data);
-    };
-    getTasks();
-}, []);
+  const { data: queriedTasks, isFetching: isFetchingTasks } = useQuery<ITask[]>(
+    ['tasks'],
+    async () => {
+      const response = await axios.get(`${basePath}/tasks`);
+      return response.data;
+    },
+    { onSuccess: queriedTasks => setTasks(queriedTasks) }
+  );
 
   const filterTasks = (
     tasks: ITask[] | undefined,
@@ -123,7 +116,7 @@ export function Week() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      {/* {isFetchingTasks && ''} */}
+      {isFetchingTasks && ''}
       <div className={style.week}>
         {weekDays.map(day => (
           <Day

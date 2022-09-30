@@ -6,15 +6,14 @@ import characterImg from '../../assets/img/char.png';
 import logoCard from '../../assets/img/star.svg';
 import style from './Sidebar.module.scss';
 import { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
-import { MiniCard } from '../../components/Card/MiniCard';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 export function Sidebar() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await auth.signout();
+    auth.logout();
     navigate('/login');
   }
   

@@ -1,10 +1,10 @@
 import { Week } from "../components/Week/Week";
-import { DashBoardStructure } from "./DashBoardStructure";
+import { DashboardLayoutPage } from "./DashboardLayoutPage";
 
 export function TasksPage() {
     return (
-        <DashBoardStructure>
+        <DashboardLayoutPage>
             <Week />
-        </DashBoardStructure>
+        </DashboardLayoutPage>
     )
 }

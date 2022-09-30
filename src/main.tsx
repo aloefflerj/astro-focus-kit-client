@@ -9,13 +9,13 @@ import App from './App';
 import { AuthProvider } from './contexts/AuthProvider';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    // <QueryClientProvider client={queryClient}>
-      <React.StrictMode>
-        <AuthProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </AuthProvider>
-      </React.StrictMode>
-    // </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+        <React.StrictMode>
+            <AuthProvider>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </AuthProvider>
+        </React.StrictMode>
+    </QueryClientProvider>
 );

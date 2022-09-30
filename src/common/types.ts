@@ -25,7 +25,8 @@ export interface ITaskDay {
 }
 
 export interface IUser {
-    id: string;
-    name: string;
-    mail: string;
+    id?: string;
+    name?: string;
+    email?: string;
+    token?: string;
 }

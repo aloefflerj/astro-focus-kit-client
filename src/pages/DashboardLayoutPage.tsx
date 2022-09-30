@@ -6,7 +6,7 @@ interface Props {
   sidebar?: boolean;
 }
 
-export const DashBoardStructure = ({ sidebar = true, children }: Props) => {
+export const DashboardLayoutPage = ({ sidebar = true, children }: Props) => {
   return (
     <>
       {sidebar && <Sidebar />}
