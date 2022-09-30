@@ -8,7 +8,7 @@ export function Router() {
   
   return (
       <Routes>
-        <Route path='/' element={<h1>home</h1>} />
+        <Route path='/' element={<Navigate to='/tasks' />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<h1>register</h1>} />
         <Route path='/tasks' element={<ProtectedLayout><TasksPage /></ProtectedLayout>} />
