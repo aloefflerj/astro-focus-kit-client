@@ -4,6 +4,7 @@ import { CommonLayoutPage } from './CommonLayoutPage';
 import { useNavigate } from 'react-router-dom';
 import { Option } from '../elements/Sidebar/Option';
 import star from '../assets/img/star.svg';
+import { Card } from '../components/Card/Card';
 
 export const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -43,7 +44,14 @@ export const LoginPage = () => {
     };
     return (
         <CommonLayoutPage>
-            <h1>Bem Vindo</h1>
+            <Card type='logo'>
+                <img src={star} alt='astro-focus-kit-logo' />
+                <h1>ASTRO FOCUS KIT</h1>
+                <img src={star} alt='astro-focus-kit-logo' />
+            </Card>
+            <span style={{ marginTop: '16px', marginBottom: '8px' }}>
+                Launching Productivity to the Stars
+            </span>
             <input
                 style={style}
                 type='text'
