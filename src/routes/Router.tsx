@@ -40,21 +40,21 @@ export function Router() {
                 }
             />
             <Route
-                path='/settings'
+                path='/metrics'
                 element={
                     <ProtectedLayout>
                         <DashboardLayoutPage>
-                            <h1>settings</h1>
+                            <h1>metrics</h1>
                         </DashboardLayoutPage>
                     </ProtectedLayout>
                 }
             />
             <Route
-                path='/view'
+                path='/settings'
                 element={
                     <ProtectedLayout>
                         <DashboardLayoutPage>
-                            <h1>view</h1>
+                            <h1>settings</h1>
                         </DashboardLayoutPage>
                     </ProtectedLayout>
                 }

@@ -50,13 +50,13 @@ export function Sidebar() {
         </div>
         <div className={style.sidebarChunk}>
           <li>
-            <NavLink to='/settings'>
-              <Option title='SETTINGS' />
+            <NavLink to='/metrics' className='someClass'>
+              <Option title='METRICS' />
             </NavLink>
           </li>
           <li>
-            <NavLink to='/view' className='someClass'>
-              <Option title='VIEW' />
+            <NavLink to='/settings'>
+              <Option title='SETTINGS' />
             </NavLink>
           </li>
           <li>
