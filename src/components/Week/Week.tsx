@@ -8,7 +8,7 @@ import { EnvironmentConfig } from '../../config/environmentConfig';
 import { Day } from '../Day/Day';
 import style from './Week.module.scss';
 import { useState } from 'react';
-import { api } from '../../services/api';
+import { loginApi } from '../../services/api';
 
 const basePath = EnvironmentConfig.mainServerApiBasePath;
 

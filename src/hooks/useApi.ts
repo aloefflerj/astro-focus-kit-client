@@ -1,5 +1,4 @@
-import axios from "axios";
-import { EnvironmentConfig } from "../config/environmentConfig";
+import { api } from "../services/api";
 
 // const api = axios.create({
 //     baseURL: EnvironmentConfig.mainServerApiBasePath
