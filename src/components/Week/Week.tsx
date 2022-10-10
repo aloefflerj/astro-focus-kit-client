@@ -9,6 +9,7 @@ import { Day } from '../Day/Day';
 import style from './Week.module.scss';
 import { useState } from 'react';
 import { loginApi } from '../../services/api';
+import { useTasksApi } from '../../services/tasks/useTasksApi';
 
 const basePath = EnvironmentConfig.mainServerApiBasePath;
 
@@ -16,14 +17,13 @@ const weekDays = currentWeekDays();
 
 export function Week() {
   const [tasks, setTasks] = useState<ITask[]>([]);
+  const { getTasks } = useTasksApi();
+  const onSuccess = (queriedTasks: ITask[]) => setTasks(queriedTasks)
 
-  const { data: queriedTasks, isFetching: isFetchingTasks } = useQuery<ITask[]>(
+  const { isFetching: isFetchingTasks } = useQuery<ITask[]>(
     ['tasks'],
-    async () => {
-      const response = await axios.get(`${basePath}/tasks`);
-      return response.data;
-    },
-    { onSuccess: queriedTasks => setTasks(queriedTasks) }
+    async () => getTasks(),
+    { onSuccess }
   );
 
   const filterTasks = (

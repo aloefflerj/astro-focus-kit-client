@@ -13,7 +13,6 @@ export const api = axios.create({
 loginApi.interceptors.request.use(
     (config) => {
         const user = getUserLocalStorage();
-        console.log(user);
 
         if (config.headers === undefined) return;
 
@@ -29,7 +28,6 @@ loginApi.interceptors.request.use(
 api.interceptors.request.use(
     (config) => {
         const user = getUserLocalStorage();
-        console.log(user);
 
         if (config.headers === undefined) return;
 
