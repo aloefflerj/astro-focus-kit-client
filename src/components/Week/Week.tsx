@@ -8,7 +8,6 @@ import { EnvironmentConfig } from '../../config/environmentConfig';
 import { Day } from '../Day/Day';
 import style from './Week.module.scss';
 import { useState } from 'react';
-import { loginApi } from '../../services/api';
 import { useTasksApi } from '../../services/tasks/useTasksApi';
 
 const basePath = EnvironmentConfig.mainServerApiBasePath;
@@ -116,7 +115,7 @@ export function Week() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      {isFetchingTasks && ''}
+      {isFetchingTasks && <div className={style.week}><h1>Fetching tasks...</h1></div>}
       <div className={style.week}>
         {weekDays.map(day => (
           <Day
