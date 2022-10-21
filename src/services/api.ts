@@ -16,7 +16,7 @@ loginApi.interceptors.request.use(
 
         if (config.headers === undefined) return;
 
-        config.headers['Authorization'] = user?.token;
+        config.headers['x-access-token'] = user?.token;
 
         return config;
     },
@@ -31,7 +31,7 @@ api.interceptors.request.use(
 
         if (config.headers === undefined) return;
 
-        config.headers['Authorization'] = user?.token;
+        config.headers['x-access-token'] = user?.token;
 
         return config;
     },
