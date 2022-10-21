@@ -9,6 +9,7 @@ import { Day } from '../Day/Day';
 import style from './Week.module.scss';
 import { useState } from 'react';
 import { useTasksApi } from '../../services/tasks/useTasksApi';
+import moment from 'moment';
 
 const basePath = EnvironmentConfig.mainServerApiBasePath;
 
@@ -17,7 +18,10 @@ const weekDays = currentWeekDays();
 export function Week() {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const { getTasks } = useTasksApi();
-  const onSuccess = (queriedTasks: ITask[]) => setTasks(queriedTasks)
+  const onSuccess = (queriedTasks: ITask[]) => setTasks(queriedTasks.map((task) => {
+    task.registerDate = moment(task.registerDate).format('YYYY/MM/DD');
+    return task
+  }))
 
   const { isFetching: isFetchingTasks } = useQuery<ITask[]>(
     ['tasks'],
