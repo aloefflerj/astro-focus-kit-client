@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { ProtectedLayout } from '../components/ProtectedLayout/ProtectedLayout';
 import { DashboardLayoutPage } from '../pages/DashboardLayoutPage';
 import { LoginPage } from '../pages/LoginPage';
+import { RegisterPage } from '../pages/RegisterPage';
 import { TasksPage } from '../pages/TasksPage';
 
 export function Router() {
@@ -10,7 +11,7 @@ export function Router() {
         <Routes>
             <Route path='/' element={<Navigate to='/tasks' />} />
             <Route path='/login' element={<LoginPage />} />
-            <Route path='/register' element={<h1>register</h1>} />
+            <Route path='/register' element={<RegisterPage />} />
             <Route
                 path='/tasks'
                 element={

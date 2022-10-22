@@ -24,3 +24,12 @@ export async function loginRequest(email: string, password: string) {
         return null;
     }
 }
+
+export async function registerRequest(name: string, email: string, password: string, confirmation: string): Promise<any> {
+    try {
+        const request = await api.post('users', { name, email, password, confirmation })
+        return request.data;
+    } catch (error) {
+        return { message: (error as Error).message };
+    }
+}

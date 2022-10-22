@@ -1,7 +1,7 @@
 import { createContext, useMemo } from 'react';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { IContext, IAuthProvider } from './types';
-import { loginRequest } from './utils';
+import { loginRequest, registerRequest } from './utils';
 
 export const AuthContext = createContext<IContext>({} as IContext);
 
@@ -15,6 +15,11 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
         setUser(payload);
     }
 
+    async function register(name: string, email: string, password: string, confirmation: string) {
+        const response = await registerRequest(name, email, password, confirmation);
+        return response;
+    }
+
     async function logout() {
         setUser(null);
     }
@@ -23,6 +28,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
         () => ({
             ...user,
             authenticate,
+            register,
             logout,
         }),
         [user]
