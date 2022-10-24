@@ -33,6 +33,9 @@ export function Day({ weekDay, monthDay, today, tasks, id }: Props) {
           </div>
         )}
       </Droppable>
+      <div className={style.dayButton}>
+        <NewTaskButton />
+      </div>
     </div>
   );
 }
