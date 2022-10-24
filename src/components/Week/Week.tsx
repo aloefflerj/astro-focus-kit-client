@@ -3,17 +3,22 @@ import axios from 'axios';
 
 import { IDay, ITask } from '../../common/types';
 import { currentWeekDays } from '../../common/utils/currentWeekDays';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { EnvironmentConfig } from '../../config/environmentConfig';
 import { Day } from '../Day/Day';
 import style from './Week.module.scss';
 import { useState } from 'react';
 import { useTasksApi } from '../../services/tasks/useTasksApi';
 import moment from 'moment';
-
-const basePath = EnvironmentConfig.mainServerApiBasePath;
+import { api } from '../../services/api';
 
 const weekDays = currentWeekDays();
+
+interface IReorderTasksRequest {
+  grabbedTaskId: string;
+  order: number;
+  destinationDate: string;
+}
 
 export function Week() {
   const [tasks, setTasks] = useState<ITask[]>([]);
@@ -28,6 +33,14 @@ export function Week() {
     async () => getTasks(),
     { onSuccess }
   );
+
+  const tasksReorderingMutation = useMutation((reorderTasksRequest: IReorderTasksRequest) => {
+    const {grabbedTaskId} = reorderTasksRequest;
+    return api.patch(`/tasks/reorder/${grabbedTaskId}`, {
+      order: reorderTasksRequest.order,
+      destinationDate: reorderTasksRequest.destinationDate
+    });
+  })
 
   const filterTasks = (
     tasks: ITask[] | undefined,
@@ -115,11 +128,19 @@ export function Week() {
     });
 
     setTasks(updatedTasks);
+
+    const reorderTasksRequest: IReorderTasksRequest = {
+      grabbedTaskId: grabbedTask.id,
+      order: destination.index,
+      destinationDate: moment(grabbedTask.registerDate).toString()
+    }
+
+    tasksReorderingMutation.mutate(reorderTasksRequest);
   };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      {isFetchingTasks && <div className={style.week}><h1>Fetching tasks...</h1></div>}
+      {(isFetchingTasks || tasksReorderingMutation.isLoading) && <div className={style.week}><h1>Fetching tasks...</h1></div>}
       <div className={style.week}>
         {weekDays.map(day => (
           <Day
