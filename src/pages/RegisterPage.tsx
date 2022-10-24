@@ -27,7 +27,6 @@ export const RegisterPage = () => {
             .has().symbols()
             .has().not().spaces();
     
-        console.log(password, confirmation)
         if (password !== confirmation)
             return { valid: false, msg: 'Confirmation does not match password'};
 
