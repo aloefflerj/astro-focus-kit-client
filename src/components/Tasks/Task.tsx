@@ -1,6 +1,5 @@
 import { Draggable } from '@hello-pangea/dnd';
-import { v4 as uuidv4 } from 'uuid';
-import { ITask } from '../../common/types';
+import style from './Task.module.scss'
 
 import { Card } from '../Card/Card';
 import { CardFooter } from '../Card/CardFooter';
@@ -14,6 +13,7 @@ export function Task({ index, id, title }: { index: number; id: string, title: s
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
+          className={style.draggable}
         >
           <Card type='task'>
             {title}

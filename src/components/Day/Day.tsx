@@ -1,11 +1,11 @@
 import { Droppable } from '@hello-pangea/dnd';
-import { v4 as uuidv4 } from 'uuid';
 
 import { Task } from '../Tasks/Task';
 import { TaskList } from '../Tasks/TaskList';
 import style from './Day.module.scss';
 import { DayHeader } from './DayHeader';
 import { ITask } from '../../common/types'; 
+import { NewTaskButton } from '../../elements/Buttons/NewTaskButton';
 
 interface Props {
   weekDay: string;
@@ -13,17 +13,18 @@ interface Props {
   today: boolean;
   id: string;
   tasks: ITask[] | undefined;
+  loading: boolean;
 }
 
-export function Day({ weekDay, monthDay, today, tasks, id }: Props) {
+export function Day({ weekDay, monthDay, today, tasks, id, loading }: Props) {
   return (
-    <div className={style.day}>
+    <div className={`${style.day} ${loading && style.loading}`}>
       <DayHeader weekDay={weekDay} monthDay={monthDay} today={today} />
       <Droppable droppableId={`${id}`}>
         {provided => (
-          <div ref={provided.innerRef} {...provided.droppableProps}>
+          <div ref={provided.innerRef} {...provided.droppableProps} className={style.droppableArea}>
             <TaskList>
-              {tasks?.map((task, index) => (
+              {tasks?.map((task) => (
                 <li key={task.id}>
                   <Task key={task.id} index={task.order} id={`${task.id}`} title={task.title}/>
                 </li>

@@ -1,10 +1,8 @@
 import { DragDropContext, DropResult } from '@hello-pangea/dnd';
-import axios from 'axios';
 
 import { IDay, ITask } from '../../common/types';
 import { currentWeekDays } from '../../common/utils/currentWeekDays';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { EnvironmentConfig } from '../../config/environmentConfig';
 import { Day } from '../Day/Day';
 import style from './Week.module.scss';
 import { useState } from 'react';
@@ -140,7 +138,6 @@ export function Week() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      {(isFetchingTasks || tasksReorderingMutation.isLoading) && <div className={style.week}><h1>Fetching tasks...</h1></div>}
       <div className={style.week}>
         {weekDays.map(day => (
           <Day
@@ -150,6 +147,7 @@ export function Week() {
             id={day.id}
             tasks={filterTasks(tasks, day)}
             today={false}
+            loading={isFetchingTasks || tasksReorderingMutation.isLoading}
           />
         ))}
       </div>
