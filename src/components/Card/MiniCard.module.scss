@@ -30,6 +30,10 @@
     background: var(--coral-light);
 }
 
+.button {
+    background: var(--coral-dark);
+}
+
 .miniCard:hover .miniCardTop {
     transform: translateY(-0.33em);
 }
@@ -54,4 +58,14 @@
         margin-left: auto; 
         margin-right: auto; 
     }
+}
+
+.miniCardButton {
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: var(--card-radius);
+    background: var(--black-medium);
+    font-family: var(--default-font);
+    width: 50px;
 }

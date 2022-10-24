@@ -1,9 +1,10 @@
 .taskList {
-    padding: 24px 12px;
+    padding-top: 26px;
     & li {
         padding-top: 26px;
+        width: 100%;
     }
-    & div.miniCard {
-        background-color: aqua;
-    }
+
+    height: 100%;
+    width: 100%;
 }
