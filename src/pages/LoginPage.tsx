@@ -77,12 +77,6 @@ export const LoginPage = () => {
             >
                 <Option type='small' title='LOGIN' />
             </button>
-            <p>
-                Fake login with mail: <strong>"eve.holt@reqres.in"</strong>
-            </p>
-            <p>
-                And password: <strong>"cityslicka"</strong>
-            </p>
         </CommonLayoutPage>
     );
 };
