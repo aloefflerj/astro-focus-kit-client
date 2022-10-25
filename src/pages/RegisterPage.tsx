@@ -109,7 +109,7 @@ export const RegisterPage = () => {
     };
     return (
         <CommonLayoutPage>
-            <Card type='logo'>
+            <Card type='logoLogin'>
                 <img src={star} alt='astro-focus-kit-logo' />
                 <h1>ASTRO FOCUS KIT</h1>
                 <img src={star} alt='astro-focus-kit-logo' />

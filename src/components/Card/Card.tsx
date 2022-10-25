@@ -2,7 +2,7 @@ import style from './Card.module.scss';
 
 interface Props {
   children: React.ReactNode;
-  type: 'logo' | 'planetOption' | 'option' | 'smallOption' | 'dayHeader' | 'task';
+  type: 'logo' | 'planetOption' | 'option' | 'smallOption' | 'dayHeader' | 'task' | 'logoLogin';
 }
 
 export function Card({ children, type }: Props) {

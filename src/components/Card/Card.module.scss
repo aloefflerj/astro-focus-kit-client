@@ -7,7 +7,9 @@
     border-radius: var(--card-radius);
     background: var(--black-medium);
     font-family: var(--default-font);
-    width: 100%;
+    &:not(.logoLogin) {
+        width: 100%;
+    }
 
     .cardTop {
         display: block;
@@ -22,6 +24,25 @@
         text-align: center;
 
         &.logo {
+            background: var(--blue-medium);
+            color: #e6e8ef;
+            font-size: 14px;
+            text-shadow: 0 2px var(--black-medium);
+            padding: 0;
+            display: flex;
+            transform: translateY(-0.33em);
+
+            img {
+                object-fit: contain;
+                width: 40px;
+            }
+
+            h1 {
+                margin: 8px 0;
+            }
+        }
+
+        &.logoLogin {
             background: var(--blue-medium);
             color: #e6e8ef;
             font-size: 14px;
