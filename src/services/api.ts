@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getUserLocalStorage } from "../contexts/AuthProvider/utils";
+import { getUserLocalStorage, unsetUserLocalStorage } from "../contexts/AuthProvider/utils";
 import { EnvironmentConfig } from "../config/environmentConfig";
 
 export const api = axios.create({
@@ -20,5 +20,15 @@ api.interceptors.request.use(
         return Promise.reject(error);
     }
 );
+
+api.interceptors.response.use(
+    (config) => config,
+    (error) => {
+        if (error.response.status === 401) {
+            unsetUserLocalStorage();
+            return;
+        }
+    }
+)
 
 //TODO: refresh x-access-token jwt token
