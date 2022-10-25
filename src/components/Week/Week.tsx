@@ -146,7 +146,7 @@ export function Week() {
             monthDay={day.monthDay}
             id={day.id}
             tasks={filterTasks(tasks, day)}
-            today={false}
+            today={day.weekDay === moment().format('dddd')}
             loading={isFetchingTasks || tasksReorderingMutation.isLoading}
           />
         ))}
