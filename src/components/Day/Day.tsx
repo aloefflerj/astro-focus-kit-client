@@ -6,7 +6,6 @@ import style from './Day.module.scss';
 import { DayHeader } from './DayHeader';
 import { ITask } from '../../common/types';
 import { NewTaskButton } from '../../elements/Buttons/NewTaskButton';
-import { useState } from 'react';
 import { Modal } from '../Modal/Modal';
 import { NewTaskOptions } from '../Tasks/NewTaskOptions';
 import { useModalContext } from '../../hooks/useModalContext';
