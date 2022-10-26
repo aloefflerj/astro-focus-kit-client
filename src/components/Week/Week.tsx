@@ -29,7 +29,7 @@ export function Week() {
   const { isFetching: isFetchingTasks } = useQuery<ITask[]>(
     ['tasks'],
     async () => getTasks(),
-    { onSuccess }
+    { onSuccess, refetchOnWindowFocus: false }
   );
 
   const tasksReorderingMutation = useMutation((reorderTasksRequest: IReorderTasksRequest) => {
