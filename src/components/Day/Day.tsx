@@ -6,19 +6,33 @@ import style from './Day.module.scss';
 import { DayHeader } from './DayHeader';
 import { ITask } from '../../common/types'; 
 import { NewTaskButton } from '../../elements/Buttons/NewTaskButton';
+import { useState } from 'react';
+import { Modal } from '../Modal/Modal';
+import { NewTaskOptions } from '../Tasks/NewTaskOptions';
 
 interface Props {
   weekDay: string;
   monthDay: string;
+  date: string;
   today: boolean;
   id: string;
   tasks: ITask[] | undefined;
   loading: boolean;
 }
 
-export function Day({ weekDay, monthDay, today, tasks, id, loading }: Props) {
+export function Day({ weekDay, monthDay, date, today, tasks, id, loading }: Props) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  }
+
+  const closeModal = () => {
+    setIsOpen(false);
+  }
+
   return (
-    <div className={`${style.day} ${loading && style.loading}`}>
+    <div className={`${style.day} ${loading && style.loading}`} id="test">
       <DayHeader weekDay={weekDay} monthDay={monthDay} today={today} />
       <Droppable droppableId={`${id}`}>
         {provided => (
@@ -34,9 +48,13 @@ export function Day({ weekDay, monthDay, today, tasks, id, loading }: Props) {
           </div>
         )}
       </Droppable>
-      <div className={style.dayButton}>
+      <div className={style.dayButton} onClick={toggleModal}>
         <NewTaskButton />
       </div>
+      <Modal opened={isOpen} onClickOutside={closeModal}>
+        <NewTaskOptions newTaskOrder={tasks !== undefined ? tasks.length : 0} newTaskDate={date}/>
+      </Modal>
     </div>
+    
   );
 }

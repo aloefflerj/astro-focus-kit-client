@@ -68,4 +68,13 @@
     background: var(--black-medium);
     font-family: var(--default-font);
     width: 50px;
+    cursor: pointer;
+}
+
+.miniCardButton:hover .miniCardTop {
+    transform: translateY(-0.33em);
+}
+
+.miniCardButton:active .miniCardTop {
+    transform: translateY(0);
 }

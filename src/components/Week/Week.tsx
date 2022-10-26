@@ -144,6 +144,7 @@ export function Week() {
             key={day.id}
             weekDay={day.weekDay.toUpperCase()}
             monthDay={day.monthDay}
+            date={day.date}
             id={day.id}
             tasks={filterTasks(tasks, day)}
             today={day.weekDay === moment().format('dddd')}
