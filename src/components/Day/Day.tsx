@@ -57,10 +57,10 @@ export function Day({
                     </div>
                 )}
             </Droppable>
-            <div className={style.dayButton} onClick={openModal}>
+            <div className={style.dayButton} onClick={e => openModal(e, date)}>
                 <NewTaskButton />
             </div>
-            <Modal>
+            <Modal modalId={date}>
                 <NewTaskOptions
                     newTaskOrder={tasks !== undefined ? tasks.length : 0}
                     newTaskDate={date}

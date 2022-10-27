@@ -18,7 +18,7 @@ export const currentWeekDays = (): IDay[] => {
             monthDay: day.format('DD'),
             weekDay: day.format('dddd')
         }
-    })
+    });
 
     return days;
 }

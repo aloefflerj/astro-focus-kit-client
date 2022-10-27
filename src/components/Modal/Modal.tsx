@@ -3,23 +3,32 @@ import style from './Modal.module.scss';
 
 export function Modal({
     children,
+    modalId,
 }: {
     children: React.ReactNode;
+    modalId: string;
 }): JSX.Element {
-    const { modal: { visible }, closeModal } = useModalContext();
+    const {
+        modal: { visible, contextId },
+        closeModal,
+    } = useModalContext();
 
     return (
         <>
             <div
                 className={` ${style.overlay} ${
-                    visible ? style.modalOpened : style.modalClosed
+                    visible && (modalId === contextId || contextId === 'all')
+                        ? style.modalOpened
+                        : style.modalClosed
                 }`}
-                onClick={closeModal}
+                onClick={() => closeModal(contextId)}
             ></div>
             <div
-                className={`${visible ? style.modalOpened : style.modalClosed} ${
-                    style.modal
-                }`}
+                className={`${
+                    visible && (modalId === contextId || contextId === 'all')
+                        ? style.modalOpened
+                        : style.modalClosed
+                } ${style.modal}`}
             >
                 <div className='cardStyle'>
                     <span className='cardStyleTop'>{children}</span>

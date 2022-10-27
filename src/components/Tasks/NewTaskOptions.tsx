@@ -1,28 +1,54 @@
-import moment from "moment";
-import { useState } from "react";
-import { Option } from "../../elements/Sidebar/Option";
-import { api } from "../../services/api";
+import { useMutation } from '@tanstack/react-query';
+import moment from 'moment';
+import { useState } from 'react';
+import { ITaskRequest } from '../../common/types';
+import { queryClient } from '../../common/utils/queryClient';
+import { Option } from '../../elements/Sidebar/Option';
+import { useModalContext } from '../../hooks/useModalContext';
+import { api } from '../../services/api';
 import style from './NewTaskOption.module.scss';
 
-export function NewTaskOptions({ newTaskOrder, newTaskDate }: { newTaskOrder: number, newTaskDate: string }) {
+export function NewTaskOptions({
+    newTaskOrder,
+    newTaskDate,
+}: {
+    newTaskOrder: number;
+    newTaskDate: string;
+}) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const { closeModal } = useModalContext();
 
     const handleTitleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
     };
 
-    const handleDescriptionInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleDescriptionInput = (
+        e: React.ChangeEvent<HTMLTextAreaElement>
+    ) => {
         setDescription(e.target.value);
     };
-    
+
+    const newTaskMutation = useMutation(
+        (newTask: ITaskRequest) => {
+            return api.post('/tasks', newTask);
+        },
+        {
+            onSuccess: () => {
+                closeModal();
+                queryClient.invalidateQueries(['tasks']);
+            },
+        }
+    );
+
     const handleNewTask = async () => {
         if (title.length === 0) {
             alert('Title cannot be empty');
             return;
         }
-        
-        const response = await api.post('/tasks', {
+
+
+        newTaskMutation.mutate({
             order: newTaskOrder,
             title: title,
             type: 'binary',
@@ -32,10 +58,10 @@ export function NewTaskOptions({ newTaskOrder, newTaskDate }: { newTaskOrder: nu
             description: description,
             registerDate: moment(newTaskDate).format(),
             conclusionDate: null,
-            deleted: false
-        })
-    }
-    
+            deleted: false,
+        });
+    };
+
     return (
         <div className={style.newTaskOptionForm}>
             <h3>New Task</h3>
@@ -55,9 +81,7 @@ export function NewTaskOptions({ newTaskOrder, newTaskDate }: { newTaskOrder: nu
                 value={description}
                 onChange={handleDescriptionInput}
             />
-            <button
-                onClick={handleNewTask}
-            >
+            <button onClick={handleNewTask}>
                 <Option type='small' title='ADD' />
             </button>
         </div>

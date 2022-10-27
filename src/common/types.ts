@@ -9,6 +9,20 @@ export interface ITask {
     description?: string;
     registerDate: string;
     conclusionDate?: string;
+    deleted: boolean;
+}
+
+export interface ITaskRequest {
+    order: number;
+    title: string;
+    type: 'binary' | 'timer' | 'pomodoro';
+    status: 'onCourse' | 'done' | 'todo';
+    urgent: boolean;
+    important: boolean;
+    description: string | null;
+    registerDate: string;
+    conclusionDate: string | null;
+    deleted: boolean;
 }
 
 export interface IDay {

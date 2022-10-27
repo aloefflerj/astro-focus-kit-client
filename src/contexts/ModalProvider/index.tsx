@@ -8,10 +8,13 @@ export const ModalProvider = ({
 }: {
     children: JSX.Element | JSX.Element[];
 }) => {
-    const [modal, setModal] = useState({ visible: false });
+    const [modal, setModal] = useState({ visible: false, contextId: 'all' });
 
-    const openModal = (payload: any) => setModal({ ...payload, visible: true });
-    const closeModal = () => setModal({ visible: false });
+    const openModal = (payload: any, contextId: string) => {
+        return setModal({ ...payload, visible: true, contextId: contextId });
+    };
+    
+    const closeModal = (contextId: string = 'all') => setModal({ visible: false, contextId: contextId});
 
     return (
         <ModalContext.Provider value={{ modal, openModal, closeModal }}>
