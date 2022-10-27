@@ -1,3 +1,14 @@
+@import '../../common/css/variables.css';
+
 .draggable {
     padding: 0px 12px;
+}
+
+.closeButton {
+    text-shadow: 0px 3px 0px var(--coral-dark);
+    font-size: 22px;
+    cursor: pointer;
+    display: inline;
+    padding: 0;
+    margin-bottom: -10px;
 }

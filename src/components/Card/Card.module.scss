@@ -90,7 +90,7 @@
         &.task {
             background: var(--coral-medium);
             cursor: grab;
-            padding: 8px 4px 16px 4px;
+            padding: 0px 8px 16px 8px;
             font-size: 18px;
         }
 
@@ -118,6 +118,11 @@
 
             & div span {
                 transform: translateY(-0.33em);
+            }
+
+            & span span {
+                transform: translateY(-0.18em);
+                text-shadow: 0px 3px 0px darken($color: #f09a82, $amount: 12);
             }
         }
     }
