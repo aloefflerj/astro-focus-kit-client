@@ -158,11 +158,11 @@
 
 :global(.done) {
     :local(.cardTop) {
-        background: var(--green-light) !important;
+        background: var(--yellow-medium) !important;
         &:hover {
             & span span {
                 transform: translateY(-0.18em);
-                text-shadow: 0px 3px 0px darken($color: #6aa37d, $amount: 2) !important;
+                text-shadow: 0px 3px 0px darken($color: #f5de7d, $amount: 15) !important;
             }
         }
     }
