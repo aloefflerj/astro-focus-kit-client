@@ -9,17 +9,24 @@ import { api } from '../../services/api';
 import style from './TaskOptions.module.scss';
 
 export function TaskOptions({
-    taskRequest
+    taskRequest,
+    action,
 }: {
-    taskRequest: INewTaskRequest | IUpdateTaskRequest
+    taskRequest: INewTaskRequest | IUpdateTaskRequest;
+    action: 'create' | 'update';
 }) {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
+    const [title, setTitle] = useState(taskRequest.title ?? '');
+    const [description, setDescription] = useState(taskRequest.description ?? '');
     const { closeModal } = useModalContext();
 
     const handleTitleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
     };
+
+    const clearFiels = () => {
+        setTitle('');
+        setDescription('');
+    }
 
     const handleDescriptionInput = (
         e: React.ChangeEvent<HTMLTextAreaElement>
@@ -33,31 +40,56 @@ export function TaskOptions({
         },
         {
             onSuccess: () => {
+                clearFiels();
                 closeModal();
                 queryClient.invalidateQueries(['tasks']);
             },
         }
     );
 
-    const handleNewTask = async () => {
+    const updateTaskMutation = useMutation(
+        (updatedTask: IUpdateTaskRequest) => {
+            return api.put(`/tasks/${updatedTask.id}`, updatedTask);
+        },
+        {
+            onSuccess: () => {
+                clearFiels();
+                closeModal();
+                queryClient.invalidateQueries(['tasks']);
+            },
+        }
+    );
+
+    const handleTaskForm = async () => {
         if (title.length === 0) {
             alert('Title cannot be empty');
             return;
         }
 
-
-        newTaskMutation.mutate({
-            order: taskRequest.order,
-            title: title,
-            type: 'binary',
-            status: 'onCourse',
-            urgent: false,
-            important: false,
-            description: description,
-            registerDate: moment(taskRequest.registerDate).format(),
-            conclusionDate: null,
-            deleted: false,
-        });
+        switch (action) {
+            case 'create':
+                newTaskMutation.mutate({
+                    order: taskRequest.order,
+                    title: title,
+                    type: 'binary',
+                    status: 'onCourse',
+                    urgent: false,
+                    important: false,
+                    description: description,
+                    registerDate: moment(taskRequest.registerDate).format(),
+                    conclusionDate: null,
+                    deleted: false,
+                });
+                break;
+            case 'update':
+                updateTaskMutation.mutate({
+                    ...taskRequest,
+                    title: title,
+                    description: description,
+                    registerDate: moment(taskRequest.registerDate).format(),
+                } as IUpdateTaskRequest);
+                break;
+        }
     };
 
     return (
@@ -79,7 +111,7 @@ export function TaskOptions({
                 value={description}
                 onChange={handleDescriptionInput}
             />
-            <button onClick={handleNewTask}>
+            <button onClick={handleTaskForm}>
                 <Option type='small' title='ADD' />
             </button>
         </div>

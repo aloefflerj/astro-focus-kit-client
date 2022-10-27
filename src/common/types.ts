@@ -26,6 +26,7 @@ export interface INewTaskRequest {
 }
 
 export interface IUpdateTaskRequest {
+    id: string;
     order: number;
     title: string;
     type: 'binary' | 'timer' | 'pomodoro';

@@ -65,6 +65,7 @@ export function Day({
                         order: tasks !== undefined ? tasks.length : 0,
                         registerDate: date
                     }}
+                    action={'create'}
                 />
             </Modal>
         </div>

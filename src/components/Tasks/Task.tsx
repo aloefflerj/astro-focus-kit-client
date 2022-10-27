@@ -14,8 +14,9 @@ import { queryClient } from '../../common/utils/queryClient';
 import { TaskOptions } from './TaskOptions';
 import { ITask } from '../../common/types';
 
-export function Task({ index, task: { id, title, status } }: { index: number; task: ITask }) {
+export function Task({ index, task }: { index: number; task: ITask }) {
   const { openModal, closeModal } = useModalContext();
+  const { id, title, status } = task;
 
   const deleteTaskMutation = useMutation(() => {
     return api.delete(`tasks/${id}`);
@@ -47,12 +48,17 @@ export function Task({ index, task: { id, title, status } }: { index: number; ta
         >
           <Card type='task' done={status === 'done'}>
             <CardHeader>
-              <span className={status === 'done' ? style.closeButtonDone : style.closeButton} onClick={e => openModal(e, `task-${id}`)}>&#x2715;</span>
+              <span className={status === 'done' ? style.closeButtonDone : style.closeButton} onClick={e => openModal(e, `delete-task-${id}`)}>&#x2715;</span>
             </CardHeader>
             {title}
             <CardFooter type='task'>
               <MiniCard active={status === 'done'} type='box'>
-                <span className={style.taskButton}>...</span>
+                <span 
+                  className={style.taskButton}
+                  onClick={e => openModal(e, `update-task-${id}`)}
+                >
+                    ...
+                </span>
               </MiniCard>
               <MiniCard active={status === 'done'} type='box'>
                 <span 
@@ -67,14 +73,20 @@ export function Task({ index, task: { id, title, status } }: { index: number; ta
         </div>
       )}
     </Draggable>
-    <Modal modalId={`task-${id}`}>
+    <Modal modalId={`delete-task-${id}`}>
         <p>Are you sure you want to delete this task?</p>
         <button 
           onClick={() => deleteTaskMutation.mutate()}
         >
           <Option type='small' title='Yes' />
         </button>
-        <button onClick={() => closeModal(`task-${id}`)}><Option type='small' title='Noooo!' /></button>
+        <button onClick={() => closeModal(`delete-task-${id}`)}><Option type='small' title='Noooo!' /></button>
+    </Modal>
+    <Modal modalId={`update-task-${id}`}>
+      <TaskOptions 
+        taskRequest={task} 
+        action={'update'}  
+      />
     </Modal>
     </>
   );
