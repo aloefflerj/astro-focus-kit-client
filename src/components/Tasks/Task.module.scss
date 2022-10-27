@@ -15,7 +15,7 @@
 }
 
 .closeButtonDone {
-    text-shadow: 0px 3px 0px var(--yellow-dark);
+    text-shadow: 0px 3px 0px darken($color: #f09a82, $amount: 15);
     font-size: 22px;
     cursor: pointer;
     display: inline;
@@ -30,5 +30,5 @@
 
 .doneTask {
     // pointer-events: none;
-    // opacity: 0.7;
+    opacity: 0.7;
 }
