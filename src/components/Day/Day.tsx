@@ -49,6 +49,7 @@ export function Day({
                                         index={task.order}
                                         id={`${task.id}`}
                                         title={task.title}
+                                        status={task.status}
                                     />
                                 </li>
                             ))}

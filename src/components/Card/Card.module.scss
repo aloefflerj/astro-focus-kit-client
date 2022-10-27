@@ -92,6 +92,7 @@
             cursor: grab;
             padding: 0px 8px 16px 8px;
             font-size: 18px;
+
         }
 
     }
@@ -152,5 +153,17 @@
 :global(.active) {
     :local(span.option) {
         background: var(--coral-medium) !important;
+    }
+}
+
+:global(.done) {
+    :local(.cardTop) {
+        background: var(--green-light) !important;
+        &:hover {
+            & span span {
+                transform: translateY(-0.18em);
+                text-shadow: 0px 3px 0px darken($color: #6aa37d, $amount: 2) !important;
+            }
+        }
     }
 }

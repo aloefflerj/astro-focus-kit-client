@@ -12,7 +12,7 @@ import { useMutation } from '@tanstack/react-query';
 import { api } from '../../services/api';
 import { queryClient } from '../../common/utils/queryClient';
 
-export function Task({ index, id, title }: { index: number; id: string, title: string }) {
+export function Task({ index, id, title, status }: { index: number; id: string, title: string, status: "done" | "onCourse" | "todo" }) {
   const { openModal, closeModal } = useModalContext();
 
   const deleteTaskMutation = useMutation(() => {
@@ -24,6 +24,15 @@ export function Task({ index, id, title }: { index: number; id: string, title: s
       }
   });
 
+  const finishTaskMutation = useMutation(() => {
+    const newStatus = status === 'done' ? 'todo' : 'done'; 
+    return api.put(`tasks/${id}`, { status: newStatus })
+  }, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['tasks']);
+      }
+  })
+
   return (
     <>
     <Draggable draggableId={`task-${id}`} index={index} key={id}>
@@ -32,19 +41,24 @@ export function Task({ index, id, title }: { index: number; id: string, title: s
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          className={style.draggable}
+          className={`${style.draggable} ${status === 'done' ? style.doneTask : ''}`}
         >
-          <Card type='task'>
+          <Card type='task' done={status === 'done'}>
             <CardHeader>
-              <span className={style.closeButton} onClick={e => openModal(e, `task-${id}`)}>&#x2715;</span>
+              <span className={status === 'done' ? style.closeButtonDone : style.closeButton} onClick={e => openModal(e, `task-${id}`)}>&#x2715;</span>
             </CardHeader>
             {title}
             <CardFooter type='task'>
-              <MiniCard active={false} type='box'>
+              <MiniCard active={status === 'done'} type='box'>
                 <span className={style.taskButton}>...</span>
               </MiniCard>
-              <MiniCard active={false} type='box'>
-                <span className={style.taskButton}>&nbsp;&nbsp;&nbsp;</span>
+              <MiniCard active={status === 'done'} type='box'>
+                <span 
+                  className={style.taskButton}
+                  onClick={() => finishTaskMutation.mutate()}
+                >
+                  {status === 'done' ? <>&#10004;</> : <>&nbsp;&nbsp;&nbsp;</>}
+                </span>
               </MiniCard>
             </CardFooter>
           </Card>

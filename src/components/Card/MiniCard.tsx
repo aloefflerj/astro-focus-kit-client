@@ -10,7 +10,7 @@ interface Props {
 export function MiniCard({ children, active, type }: Props) {
   switch (type) {
     case 'box': return(
-      <div className={style.miniCard}>
+      <div className={style.miniCard} >
           <span className={`${style.miniCardTop} ${style[type]} ${active === true ? 'active' : ''}`}>
               {children}
           </span>
