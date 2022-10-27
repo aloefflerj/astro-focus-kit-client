@@ -6,9 +6,9 @@ import { queryClient } from '../../common/utils/queryClient';
 import { Option } from '../../elements/Sidebar/Option';
 import { useModalContext } from '../../hooks/useModalContext';
 import { api } from '../../services/api';
-import style from './NewTaskOption.module.scss';
+import style from './TaskOptions.module.scss';
 
-export function NewTaskOptions({
+export function TaskOptions({
     newTaskOrder,
     newTaskDate,
 }: {

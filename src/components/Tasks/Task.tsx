@@ -11,6 +11,7 @@ import { Option } from '../../elements/Sidebar/Option';
 import { useMutation } from '@tanstack/react-query';
 import { api } from '../../services/api';
 import { queryClient } from '../../common/utils/queryClient';
+import { TaskOptions } from './TaskOptions';
 
 export function Task({ index, id, title, status }: { index: number; id: string, title: string, status: "done" | "onCourse" | "todo" }) {
   const { openModal, closeModal } = useModalContext();

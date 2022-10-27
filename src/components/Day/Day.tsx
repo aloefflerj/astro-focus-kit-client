@@ -7,7 +7,7 @@ import { DayHeader } from './DayHeader';
 import { ITask } from '../../common/types';
 import { NewTaskButton } from '../../elements/Buttons/NewTaskButton';
 import { Modal } from '../Modal/Modal';
-import { NewTaskOptions } from '../Tasks/NewTaskOptions';
+import { TaskOptions } from '../Tasks/TaskOptions';
 import { useModalContext } from '../../hooks/useModalContext';
 
 interface Props {
@@ -62,7 +62,7 @@ export function Day({
                 <NewTaskButton />
             </div>
             <Modal modalId={date}>
-                <NewTaskOptions
+                <TaskOptions
                     newTaskOrder={tasks !== undefined ? tasks.length : 0}
                     newTaskDate={date}
                 />
