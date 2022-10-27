@@ -12,7 +12,20 @@ export interface ITask {
     deleted: boolean;
 }
 
-export interface ITaskRequest {
+export interface INewTaskRequest {
+    order: number;
+    title?: string;
+    type?: 'binary' | 'timer' | 'pomodoro';
+    status?: 'onCourse' | 'done' | 'todo';
+    urgent?: boolean;
+    important?: boolean;
+    description?: string | null;
+    registerDate: string;
+    conclusionDate?: string | null;
+    deleted?: boolean;
+}
+
+export interface IUpdateTaskRequest {
     order: number;
     title: string;
     type: 'binary' | 'timer' | 'pomodoro';

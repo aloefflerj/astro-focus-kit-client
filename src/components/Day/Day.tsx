@@ -63,8 +63,10 @@ export function Day({
             </div>
             <Modal modalId={date}>
                 <TaskOptions
-                    newTaskOrder={tasks !== undefined ? tasks.length : 0}
-                    newTaskDate={date}
+                    taskRequest={{
+                        order: tasks !== undefined ? tasks.length : 0,
+                        registerDate: date
+                    }}
                 />
             </Modal>
         </div>

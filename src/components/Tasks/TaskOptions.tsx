@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import moment from 'moment';
 import { useState } from 'react';
-import { ITaskRequest } from '../../common/types';
+import { INewTaskRequest, IUpdateTaskRequest } from '../../common/types';
 import { queryClient } from '../../common/utils/queryClient';
 import { Option } from '../../elements/Sidebar/Option';
 import { useModalContext } from '../../hooks/useModalContext';
@@ -9,11 +9,9 @@ import { api } from '../../services/api';
 import style from './TaskOptions.module.scss';
 
 export function TaskOptions({
-    newTaskOrder,
-    newTaskDate,
+    taskRequest
 }: {
-    newTaskOrder: number;
-    newTaskDate: string;
+    taskRequest: INewTaskRequest | IUpdateTaskRequest
 }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -30,7 +28,7 @@ export function TaskOptions({
     };
 
     const newTaskMutation = useMutation(
-        (newTask: ITaskRequest) => {
+        (newTask: INewTaskRequest) => {
             return api.post('/tasks', newTask);
         },
         {
@@ -49,14 +47,14 @@ export function TaskOptions({
 
 
         newTaskMutation.mutate({
-            order: newTaskOrder,
+            order: taskRequest.order,
             title: title,
             type: 'binary',
             status: 'onCourse',
             urgent: false,
             important: false,
             description: description,
-            registerDate: moment(newTaskDate).format(),
+            registerDate: moment(taskRequest.registerDate).format(),
             conclusionDate: null,
             deleted: false,
         });
