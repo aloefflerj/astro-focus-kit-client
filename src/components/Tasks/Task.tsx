@@ -12,8 +12,9 @@ import { useMutation } from '@tanstack/react-query';
 import { api } from '../../services/api';
 import { queryClient } from '../../common/utils/queryClient';
 import { TaskOptions } from './TaskOptions';
+import { ITask } from '../../common/types';
 
-export function Task({ index, id, title, status }: { index: number; id: string, title: string, status: "done" | "onCourse" | "todo" }) {
+export function Task({ index, task: { id, title, status } }: { index: number; task: ITask }) {
   const { openModal, closeModal } = useModalContext();
 
   const deleteTaskMutation = useMutation(() => {

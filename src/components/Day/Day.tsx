@@ -45,11 +45,9 @@ export function Day({
                             {tasks?.map(task => (
                                 <li key={task.id}>
                                     <Task
+                                        task={task}
                                         key={task.id}
                                         index={task.order}
-                                        id={`${task.id}`}
-                                        title={task.title}
-                                        status={task.status}
                                     />
                                 </li>
                             ))}
