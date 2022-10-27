@@ -41,10 +41,10 @@ export function Task({ index, id, title }: { index: number; id: string, title: s
             {title}
             <CardFooter type='task'>
               <MiniCard active={false} type='box'>
-                ...
+                <span className={style.taskButton}>...</span>
               </MiniCard>
               <MiniCard active={false} type='box'>
-                &nbsp;&nbsp;&nbsp;
+                <span className={style.taskButton}>&nbsp;&nbsp;&nbsp;</span>
               </MiniCard>
             </CardFooter>
           </Card>
