@@ -3,8 +3,8 @@
     display: flex;
     flex-direction: column;
     width: calc(100% - 112px);
-    padding: 12px 24px 0px 64px;
-    height: 90vh;
+    padding: 12px 24px 0 64px;
+    height: calc(100% - 112px);
     background-color: var(--coral-medium);
     border-radius: 4px;
 }
@@ -16,7 +16,7 @@
     width: 6px;
     background-color: var(--black-medium);
     top: 82px;
-    bottom: 0;
+    bottom: 18px;
     left: 5;
     margin-left: -24px;
 }
