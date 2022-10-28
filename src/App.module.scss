@@ -36,6 +36,15 @@
         font-family: var(--default-font);
     }
 
+    .cardStyleHover {
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        border-radius: var(--card-radius);
+        background: var(--black-medium);
+        font-family: var(--default-font);
+    }
+
     .cardStyleTop {
         display: block;
         box-sizing: border-box;

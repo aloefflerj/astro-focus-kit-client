@@ -2,7 +2,7 @@
     padding-top: 24px;
     padding-left: 24px;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
 }
 
 .starImgWrapper {
@@ -10,7 +10,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 100000000;
+    z-index: 10;
 }
 
 .starImg {
@@ -20,6 +20,22 @@
 }
 
 .cardElement {
-    flex-grow: 1;
+    // flex-grow: .5;
     padding-right: 24px;
+    transition: all .5s;
+    cursor: pointer;
+    &:hover {
+        flex-grow: 1;
+    }
+}
+
+:global {
+    .cardStyleHover {
+        :hover{
+            background-color: var(--coral-medium);
+            -webkit-transition: background-color 100ms linear;
+            -ms-transition: background-color 100ms linear;
+            transition: background-color 100ms linear;
+        }
+    }
 }
