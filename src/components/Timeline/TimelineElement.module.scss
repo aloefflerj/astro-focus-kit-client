@@ -1,0 +1,25 @@
+.timelineElement {
+    padding-top: 24px;
+    padding-left: 24px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.starImgWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100000000;
+}
+
+.starImg {
+    height: 64px;
+    width: auto;
+    margin-left: -90px;
+}
+
+.cardElement {
+    flex-grow: 1;
+    padding-right: 24px;
+}

@@ -3,7 +3,7 @@ import style from './Card.module.scss';
 interface Props {
   children: React.ReactNode;
   type: 'logo' | 'planetOption' | 'option' | 'smallOption' | 'dayHeader' | 'task' | 'logoLogin';
-  done: boolean;
+  done?: boolean;
 }
 
 export function Card({ children, type, done }: Props) {

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ProtectedLayout } from '../components/ProtectedLayout/ProtectedLayout';
 import { DashboardLayoutPage } from '../pages/DashboardLayoutPage';
+import { JournalPage } from '../pages/JournalPage';
 import { LoginPage } from '../pages/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage';
 import { TasksPage } from '../pages/TasksPage';
@@ -34,9 +35,7 @@ export function Router() {
                 path='/journal'
                 element={
                     <ProtectedLayout>
-                        <DashboardLayoutPage>
-                            <h1>journal</h1>
-                        </DashboardLayoutPage>
+                        <JournalPage />
                     </ProtectedLayout>
                 }
             />

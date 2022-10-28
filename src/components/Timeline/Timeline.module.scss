@@ -1,0 +1,22 @@
+.timeline {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 112px);
+    padding: 12px 24px 0px 64px;
+    height: 90vh;
+    background-color: var(--coral-medium);
+    border-radius: 4px;
+}
+
+.timeline::after {
+    overflow-y: scroll;
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: var(--black-medium);
+    top: 82px;
+    bottom: 0;
+    left: 5;
+    margin-left: -24px;
+}
