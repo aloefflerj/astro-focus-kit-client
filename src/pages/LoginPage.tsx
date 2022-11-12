@@ -49,9 +49,9 @@ export const LoginPage = () => {
                 <h1>ASTRO FOCUS KIT</h1>
                 <img src={star} alt='astro-focus-kit-logo' />
             </Card>
-            <span style={{ marginTop: '16px', marginBottom: '8px' }}>
-                Launching Productivity to the Stars
-            </span>
+            
+            <p>Launching productivity to the stars</p>
+            
             <input
                 style={style}
                 type='text'

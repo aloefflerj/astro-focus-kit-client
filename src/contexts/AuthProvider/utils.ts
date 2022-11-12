@@ -1,5 +1,4 @@
 import { IUser } from "../../common/types";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { api } from "../../services/api";
 
 export function setUserLocalStorage(user: IUser | null) {
