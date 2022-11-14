@@ -4,6 +4,7 @@ import { AuthenticatedLayout } from '../components/ProtectedLayout/Authenticated
 import { ProtectedLayout } from '../components/ProtectedLayout/ProtectedLayout';
 import { DashboardLayoutPage } from '../pages/DashboardLayoutPage';
 import { JournalPage } from '../pages/JournalPage';
+import { LandingPage } from '../pages/LandingPage';
 import { LoginPage } from '../pages/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage';
 import { TasksPage } from '../pages/TasksPage';
@@ -81,6 +82,10 @@ export function Router() {
                         </DashboardLayoutPage>
                     </ProtectedLayout>
                 }
+            />
+            <Route
+                path='/quote'
+                element={<LandingPage />}
             />
             <Route path='*' element={<h1>not found</h1>} />
         </Routes>
