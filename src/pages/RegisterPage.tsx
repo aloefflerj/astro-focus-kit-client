@@ -6,6 +6,7 @@ import { CommonLayoutPage } from './CommonLayoutPage';
 import { Option } from '../elements/Sidebar/Option';
 import star from '../assets/img/star.svg';
 import { Card } from '../components/Card/Card';
+import { DashboardLayoutPage } from './DashboardLayoutPage';
 
 export const RegisterPage = () => {
     const [name, setName] = useState('');
@@ -108,7 +109,7 @@ export const RegisterPage = () => {
         fontSize: '18px',
     };
     return (
-        <CommonLayoutPage>
+        <DashboardLayoutPage>
             <Card type='logoLogin'>
                 <img src={star} alt='astro-focus-kit-logo' />
                 <h1>ASTRO FOCUS KIT</h1>
@@ -157,6 +158,6 @@ export const RegisterPage = () => {
             >
                 <Option type='small' title='LOGIN' />
             </button>
-        </CommonLayoutPage>
+        </DashboardLayoutPage>
     );
 };
