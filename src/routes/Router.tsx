@@ -19,7 +19,13 @@ export function Router() {
                         <LoginPage />
                     </AuthenticatedLayout>
                 } />
-            <Route path='/register' element={<RegisterPage />} />
+            <Route 
+                path='/register' 
+                element={
+                    <ProtectedLayout>
+                        <RegisterPage />
+                    </ProtectedLayout>
+                } />
             <Route
                 path='/tasks'
                 element={
