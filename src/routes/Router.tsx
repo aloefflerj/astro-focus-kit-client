@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { AuthenticatedLayout } from '../components/ProtectedLayout/AuthenticatedLayout';
 import { ProtectedLayout } from '../components/ProtectedLayout/ProtectedLayout';
 import { DashboardLayoutPage } from '../pages/DashboardLayoutPage';
 import { JournalPage } from '../pages/JournalPage';
@@ -11,7 +12,13 @@ export function Router() {
     return (
         <Routes>
             <Route path='/' element={<Navigate to='/tasks' />} />
-            <Route path='/login' element={<LoginPage />} />
+            <Route 
+                path='/login' 
+                element={
+                    <AuthenticatedLayout>
+                        <LoginPage />
+                    </AuthenticatedLayout>
+                } />
             <Route path='/register' element={<RegisterPage />} />
             <Route
                 path='/tasks'
