@@ -87,7 +87,7 @@ export const RegisterPage = () => {
 
         try {
             const response = await auth.register(name, email, password, confirmation);
-            if (response.code === 201) {
+            if (response.status === 201) {
                 alert('usuário cadastrado com sucesso!');
             }
 

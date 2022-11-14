@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { IUser } from "../../common/types";
 
 export interface ILoading {
@@ -7,7 +7,7 @@ export interface ILoading {
 
 export interface IContext extends IUser {
     authenticate: (email: string, password: string) => Promise<void>;
-    register: (name: string, email: string, password: string, confirmation: string) => Promise<AxiosError>;
+    register: (name: string, email: string, password: string, confirmation: string) => Promise<AxiosError | AxiosResponse>;
     logout: () => void;
 }
 
