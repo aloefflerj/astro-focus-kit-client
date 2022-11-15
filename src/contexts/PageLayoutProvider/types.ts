@@ -1,4 +1,4 @@
-export type Layout = 'wholePageLayout' | 'sidebarLayout';
+export type Layout = 'commonLayout' | 'dashboardLayout';
 
 export interface IPageLayoutContext {
     setLayoutType: (layout: Layout) => void;

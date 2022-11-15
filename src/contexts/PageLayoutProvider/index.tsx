@@ -8,7 +8,7 @@ interface IPageLayoutProvider {
 export const PageLayoutContext = createContext({} as IPageLayoutContext);
 
 export const PageLayoutProvider = ({children}: IPageLayoutProvider) => {
-    const [layout, setLayout] = useState<Layout>('wholePageLayout')
+    const [layout, setLayout] = useState<Layout>('commonLayout')
 
     const setLayoutType = (layout: Layout): void => {
         setLayout(layout);
