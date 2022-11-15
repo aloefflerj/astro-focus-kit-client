@@ -1,15 +1,14 @@
 import style from './App.module.scss';
 import { Router } from './routes/Router';
-import { useContext } from 'react';
-import { AuthContext } from './contexts/AuthProvider';
 import * as moment from 'moment';
 import 'moment/locale/pt-br';
+import { usePageLayout } from './hooks/usePageLayout';
 moment.locale('pt-br')
 
 function App() {
-    const auth = useContext(AuthContext);
+    const { layout } = usePageLayout();
     return (
-        <div className={auth.email ? style.app : style.defaultLayout}>
+        <div className={layout === 'commonLayout' ? style.defaultLayout : style.app}>
             <Router />
         </div>
     );

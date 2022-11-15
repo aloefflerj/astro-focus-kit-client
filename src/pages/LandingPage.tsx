@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { api } from '../services/api';
-import { DashboardLayoutPage } from './DashboardLayoutPage';
+import { CommonLayoutPage } from './CommonLayoutPage';
 
 interface IQuote {
     quote?: string;
@@ -18,9 +18,9 @@ export function LandingPage() {
     }, ['quote'])
 
     return (
-        <DashboardLayoutPage sidebar={false}>
+        <CommonLayoutPage>
             <h2>{quote.quote}</h2>
             <h4>{quote.author}</h4>
-        </DashboardLayoutPage>
+        </CommonLayoutPage>
     );
 }

@@ -37,11 +37,7 @@ export function Router() {
             />
             <Route
                 path='/landing'
-                element={
-                    <ProtectedLayout>
-                        <LandingPage />
-                    </ProtectedLayout>
-                }
+                element={<LandingPage />}
             />
             <Route
                 path='/journal'
