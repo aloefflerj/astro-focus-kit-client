@@ -8,15 +8,18 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { AuthProvider } from './contexts/AuthProvider';
 import { ModalProvider } from './contexts/ModalProvider';
+import { PageLayoutProvider } from './contexts/PageLayoutProvider';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <QueryClientProvider client={queryClient}>
         <React.StrictMode>
             <AuthProvider>
                 <ModalProvider>
-                    <BrowserRouter>
-                        <App />
-                    </BrowserRouter>
+                    <PageLayoutProvider>
+                        <BrowserRouter>
+                            <App />
+                        </BrowserRouter>
+                    </PageLayoutProvider>
                 </ModalProvider>
             </AuthProvider>
         </React.StrictMode>
