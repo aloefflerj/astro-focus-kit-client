@@ -55,12 +55,12 @@ export function Sidebar() {
         </div>
         <div className={style.sidebarChunk}>
           <li>
-            <NavLink to='/settings'>
+            <NavLink to='/settings' >
               <Option title='SETTINGS' />
             </NavLink>
           </li>
           <li>
-            <a onClick={handleLogout}>
+            <a onClick={handleLogout} id="astro-focus-kit-logout-button" >
               <Option type='small' title='LOGOUT' />
             </a>
           </li>
