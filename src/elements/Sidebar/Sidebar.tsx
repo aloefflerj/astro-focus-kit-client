@@ -31,7 +31,7 @@ export function Sidebar() {
             </NavLink>
           </li>
           <li>
-            <NavLink to='/planet'>
+            <NavLink to='/landing'>
               <Card type='planetOption'>
                 <img src={characterImg} alt='character-img' />
               </Card>

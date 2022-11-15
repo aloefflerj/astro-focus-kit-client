@@ -36,12 +36,10 @@ export function Router() {
                 }
             />
             <Route
-                path='/planet'
+                path='/landing'
                 element={
                     <ProtectedLayout>
-                        <DashboardLayoutPage>
-                            <h1>planet</h1>
-                        </DashboardLayoutPage>
+                        <LandingPage />
                     </ProtectedLayout>
                 }
             />
@@ -82,10 +80,6 @@ export function Router() {
                         </DashboardLayoutPage>
                     </ProtectedLayout>
                 }
-            />
-            <Route
-                path='/quote'
-                element={<LandingPage />}
             />
             <Route path='*' element={<h1>not found</h1>} />
         </Routes>
