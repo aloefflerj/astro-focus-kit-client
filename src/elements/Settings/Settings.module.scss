@@ -1,0 +1,35 @@
+.settings {
+    padding: 32px 0;
+}
+
+.goBackButton {
+    max-width: 90px;
+    cursor: pointer;
+}
+
+.blockedSitesList {
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.blockedSiteWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-right: 12px;
+}
+
+.header {
+    width: 100%;
+    margin: 32px 0 24px 0;
+    display: flex;
+    justify-content: baseline;
+}
+
+.headerTitleWrapper {
+    width: 20%;
+}

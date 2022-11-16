@@ -1,9 +1,16 @@
-import { DashboardLayoutPage } from "../DashboardLayoutPage";
+import { Link, Outlet } from 'react-router-dom';
+import { SettingsMain } from '../../elements/Settings/SettingsMain';
+import { Option } from '../../elements/Sidebar/Option';
+import { DashboardLayoutPage } from '../DashboardLayoutPage';
+
+import style from './SettingsPage.module.scss';
 
 export function SettingsPage() {
-    return(
+    return (
         <DashboardLayoutPage>
-            <h1>Settings Page</h1>
+            <div className={style.settingsPage}>
+                <Outlet />
+            </div>
         </DashboardLayoutPage>
-    )
+    );
 }

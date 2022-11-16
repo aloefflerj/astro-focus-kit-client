@@ -18,6 +18,11 @@
     margin: 0 10%;
 }
 
+.emptyElementTop {
+    width: 100%;
+    height: 20%;
+}
+
 .goBackButton {
     position: absolute;
     top: 12px;
@@ -27,11 +32,6 @@
     background-color: var(--yellow-medium);
     border-radius: 4px;
     z-index: 10;
-}
-
-.emptyElementTop {
-    width: 100%;
-    height: 20%;
 }
 
 .emptyElementBottom {
