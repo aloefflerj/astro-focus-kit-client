@@ -23,6 +23,10 @@
         padding: 20px 30px;
         text-align: center;
 
+        &.default {
+            background-color: var(--coral-light);
+        }
+
         &.logo {
             background: var(--blue-medium);
             color: #e6e8ef;
@@ -101,6 +105,10 @@
         .cardTop {
             transform: translateY(-0.33em);
 
+            &.default {
+                transform: translateY(-0.2em);
+            }
+
             &.logo {
                 transform: translateY(-0.50em);
             }
@@ -137,6 +145,10 @@
         .cardTop {
             &:not(.dayHeader, .task) {
                 transform: translateY(0);
+            }
+
+            &.default {
+                transform: translateY(-0.2em);
             }
 
             &.task {

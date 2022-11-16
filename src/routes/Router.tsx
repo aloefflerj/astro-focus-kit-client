@@ -4,7 +4,7 @@ import { AuthenticatedLayout } from '../components/ProtectedLayout/Authenticated
 import { ProtectedLayout } from '../components/ProtectedLayout/ProtectedLayout';
 import { DashboardLayoutPage } from '../pages/DashboardLayoutPage';
 import { JournalPage } from '../pages/JournalPage';
-import { LandingPage } from '../pages/LandingPage';
+import { LandingPage } from '../pages/LandingPage/LandingPage';
 import { LoginPage } from '../pages/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage';
 import { TasksPage } from '../pages/TasksPage';
