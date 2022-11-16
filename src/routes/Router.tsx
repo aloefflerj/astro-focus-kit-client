@@ -7,6 +7,7 @@ import { JournalPage } from '../pages/JournalPage';
 import { LandingPage } from '../pages/LandingPage/LandingPage';
 import { LoginPage } from '../pages/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage';
+import { SettingsPage } from '../pages/SettingsPage/SettingsPage';
 import { TasksPage } from '../pages/TasksPage';
 
 export function Router() {
@@ -61,9 +62,7 @@ export function Router() {
                 path='/settings'
                 element={
                     <ProtectedLayout>
-                        <DashboardLayoutPage>
-                            <h1>settings</h1>
-                        </DashboardLayoutPage>
+                        <SettingsPage />
                     </ProtectedLayout>
                 }
             />
