@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { Option } from './Option';
 import { Card } from '../../components/Card/Card'
 
-import characterImg from '../../assets/img/char.png';
+import characterImg from '../../assets/img/wizard.png';
 import logoCard from '../../assets/img/star.svg';
 import style from './Sidebar.module.scss';
 import { useContext } from 'react';

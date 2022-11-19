@@ -6,7 +6,7 @@ import { Option } from '../../elements/Sidebar/Option';
 import { api } from '../../services/api';
 import { CommonLayoutPage } from '../CommonLayoutPage';
 import style from './LandingPage.module.scss';
-import char from '../../assets/img/char2.png';
+import char from '../../assets/img/wizard-landing-page.png';
 
 interface IQuote {
     quote?: string;
