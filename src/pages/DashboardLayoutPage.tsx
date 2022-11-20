@@ -9,7 +9,7 @@ interface Props {
 
 export const DashboardLayoutPage = ({ sidebar = true, children }: Props) => {
   const { setLayout } = usePageLayout();
-  // setLayout('dashboardLayout');
+  setLayout('dashboardLayout');
 
   return (
     <>
