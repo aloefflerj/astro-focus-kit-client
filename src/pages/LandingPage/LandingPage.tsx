@@ -7,6 +7,8 @@ import { api } from '../../services/api';
 import { CommonLayoutPage } from '../CommonLayoutPage';
 import style from './LandingPage.module.scss';
 import char from '../../assets/img/wizard-landing-page.png';
+import { Modal } from '../../components/Modal/Modal';
+import { useModalContext } from '../../hooks/useModalContext';
 
 interface IQuote {
     quote?: string;
@@ -20,8 +22,9 @@ export function LandingPage({ block = false }: { block: boolean }) {
     });
 
     const { site } = useParams();
-
     const navigate = useNavigate();
+
+    const { openModal } = useModalContext();
 
     useEffect(() => {
         api.get('/quotes').then(({ data }) => setQuote(data));
@@ -55,12 +58,12 @@ export function LandingPage({ block = false }: { block: boolean }) {
                 <div className={style.emptyElementMiddle}></div>
                 <div className={style.buttonWrapper}>
                     <div className={style.shineOutline}>
-                        <button>
+                        <button onClick={() => redirectToHome()}>
                             <Option title='Go Back to Tasks' />
                         </button>
                     </div>
                     <div className={style.shineOutline}>
-                        <button>
+                        <button onClick={e => openModal(e, 'goAnyway')}>
                             <Option title='I Want to Go Anyway' />
                         </button>
                     </div>
@@ -96,6 +99,22 @@ export function LandingPage({ block = false }: { block: boolean }) {
                     <Option title='«' />
                 </button>
                 {renderMainLayout()}
+                <Modal modalId='goAnyway' overlay='blockPageOverlay'>
+                    <div className={style.goAnywayModalContent}>
+                        <h3>Why do you wanna go?</h3>
+                        <textarea
+                            className='input'
+                            placeholder='why procrastinate? :('
+                            rows={10}
+                            name='description'
+                            // value={}
+                            // onChange={}
+                        />
+                        <button onClick={() => false}>
+                            <Option type='small' title='GO' />
+                        </button>
+                    </div>
+                </Modal>
                 <footer className={style.ground}></footer>
                 <div className={style.char}>
                     <img src={char} alt='char' />

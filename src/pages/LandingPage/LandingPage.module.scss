@@ -23,7 +23,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     p {
+        font-weight: bold;
         color: var(--yellow-medium);
     }
 
@@ -75,6 +77,15 @@
     background-color: var(--yellow-medium);
     border-radius: 4px;
     z-index: 10;
+}
+
+.goAnywayModalContent {
+    display: flex;
+    flex-direction: column;
+    button {
+        width: 100%;
+        padding: 14px 0 0 0;
+    }
 }
 
 .char {

@@ -12,6 +12,18 @@
     z-index: 1000;
 }
 
+.blockPageOverlay {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($color: #242435, $alpha: 0.8);
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
 .modalOpened {
     // position: absolute;
 }

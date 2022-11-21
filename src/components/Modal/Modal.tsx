@@ -4,9 +4,11 @@ import style from './Modal.module.scss';
 export function Modal({
     children,
     modalId,
+    overlay = 'default'
 }: {
     children: React.ReactNode;
     modalId: string;
+    overlay?: 'default' | 'blockPageOverlay'
 }): JSX.Element {
     const {
         modal: { visible, contextId },
@@ -16,7 +18,7 @@ export function Modal({
     return (
         <>
             <div
-                className={` ${style.overlay} ${
+                className={` ${overlay === 'default' ? style.overlay : style.blockPageOverlay } ${
                     visible && (modalId === contextId || contextId === 'all')
                         ? style.modalOpened
                         : style.modalClosed
