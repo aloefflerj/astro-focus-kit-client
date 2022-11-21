@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Card } from '../../components/Card/Card';
 
 import { Option } from '../../elements/Sidebar/Option';
@@ -13,11 +13,13 @@ interface IQuote {
     author?: string;
 }
 
-export function LandingPage() {
+export function LandingPage({ block = false }: { block: boolean }) {
     const [quote, setQuote] = useState<IQuote>({
         quote: '',
         author: '',
     });
+
+    const { site } = useParams();
 
     const navigate = useNavigate();
 
@@ -27,12 +29,53 @@ export function LandingPage() {
 
     const redirectToHome = () => navigate('/');
 
-    return (
-        <CommonLayoutPage>
-            <div className={`${style.landingPage} landingPage`}>
-                <button className={style.goBackButton} onClick={redirectToHome}>
-                    <Option title='«' />
-                </button>
+    const renderMainLayout = () => {
+        const siteBlockedMsg = (
+            <>
+                <h2>{site} blocked.</h2>
+                <p>Do you want to go anyway?</p>
+            </>
+        );
+        const emptyBlockedMsg = (
+            <>
+                <h2>Site blocked.</h2>
+                <p>Do you want to go anyway?</p>
+            </>
+        );
+
+        const blockLayout = (
+            <>
+                <div className={style.emptyElementTop}></div>
+                <div className={style.emptyElementMiddle}></div>
+                <div className={style.quoteWrapper}>
+                    <Card type='default'>
+                        {site ? siteBlockedMsg : emptyBlockedMsg}
+                    </Card>
+                </div>
+                <div className={style.emptyElementMiddle}></div>
+                <div className={style.buttonWrapper}>
+                    <div className={style.shineOutline}>
+                        <button>
+                            <Option title='Go Back to Tasks' />
+                        </button>
+                    </div>
+                    <div className={style.shineOutline}>
+                        <button>
+                            <Option title='I Want to Go Anyway' />
+                        </button>
+                    </div>
+                </div>
+                <div className={style.emptyElementMiddle}></div>
+                <div className={style.quoteWrapperBlocked}>
+                    <p>{quote.quote}</p>
+                    <small>{quote.author}</small>
+                </div>
+                <div className={style.emptyElementBottom}></div>
+            </>
+        );
+
+        const simpleQuotesLayout = (
+            <>
                 <div className={style.emptyElementTop}></div>
                 <div className={style.quoteWrapper}>
                     <Card type='default'>
@@ -41,10 +84,21 @@ export function LandingPage() {
                     </Card>
                 </div>
                 <div className={style.emptyElementBottom}></div>
-                <footer className={style.ground}>
-                </footer>
+            </>
+        );
+        return block ? blockLayout : simpleQuotesLayout;
+    };
+
+    return (
+        <CommonLayoutPage>
+            <div className={`${style.landingPage} landingPage`}>
+                <button className={style.goBackButton} onClick={redirectToHome}>
+                    <Option title='«' />
+                </button>
+                {renderMainLayout()}
+                <footer className={style.ground}></footer>
                 <div className={style.char}>
-                    <img src={char} alt="char" />
+                    <img src={char} alt='char' />
                 </div>
                 <div className={style.bgAnimation}>
                     <div className={style.stars}></div>

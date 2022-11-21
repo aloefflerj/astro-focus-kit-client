@@ -16,7 +16,7 @@ export function Router() {
     return (
         <Routes>
             <Route path='/'>
-                <Route path='' element={<Navigate to='/tasks'/>}/>
+                <Route path='' element={<Navigate to='/tasks' />} />
                 <Route
                     path='login'
                     element={
@@ -41,7 +41,24 @@ export function Router() {
                         </ProtectedLayout>
                     }
                 />
-                <Route path='landing' element={<LandingPage />} />
+                <Route path='quotes' element={<LandingPage block={false} />} />
+                <Route path='block'>
+                    <Route path=''
+                        element={
+                            <ProtectedLayout>
+                                <LandingPage block={true} />
+                            </ProtectedLayout>
+                        }
+                    />
+                    <Route path=':site'
+                        element={
+                            <ProtectedLayout>
+                                <LandingPage block={true} />
+                            </ProtectedLayout>
+                        }
+                    />
+                </Route>
+
                 <Route
                     path='journal'
                     element={
