@@ -50,7 +50,7 @@ export function Router() {
                             </ProtectedLayout>
                         }
                     />
-                    <Route path=':site'
+                    <Route path=':siteId'
                         element={
                             <ProtectedLayout>
                                 <LandingPage block={true} />

@@ -58,3 +58,10 @@ export interface IUser {
     email?: string;
     token?: string;
 }
+
+export interface IReason {
+    id?: string;
+    content: string;
+    reasonDateTime: string;
+    site: string;
+}

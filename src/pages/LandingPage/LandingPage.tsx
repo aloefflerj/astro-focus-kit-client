@@ -9,6 +9,9 @@ import style from './LandingPage.module.scss';
 import char from '../../assets/img/wizard-landing-page.png';
 import { Modal } from '../../components/Modal/Modal';
 import { useModalContext } from '../../hooks/useModalContext';
+import { IReason } from '../../common/types';
+import moment from 'moment';
+import { useSitesApi } from '../../services/sites/useSitesApi';
 
 interface IQuote {
     quote?: string;
@@ -21,21 +24,41 @@ export function LandingPage({ block = false }: { block: boolean }) {
         author: '',
     });
 
-    const { site } = useParams();
+    const { siteId } = useParams();
     const navigate = useNavigate();
+    const { getSiteConfig } = useSitesApi();
+
+    const [site, setSite] = useState({
+        url: 'Site',
+        id: '',
+    });
+
+    const [currentReason, setCurrentReason] = useState<IReason>({
+        content: '',
+        reasonDateTime: moment().toISOString(),
+        site: site?.url,
+    });
 
     const { openModal } = useModalContext();
 
     useEffect(() => {
+        if (siteId === undefined) return;
+        getSiteConfig(siteId).then(site => {
+            setSite({ url: site.url, id: site.id });
+        });
         api.get('/quotes').then(({ data }) => setQuote(data));
-    }, ['quote']);
+    }, ['quote', 'site']);
 
     const redirectToHome = () => navigate('/');
+
+    const updateReasonContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setCurrentReason({ ...currentReason, content: e.target.value });
+    };
 
     const renderMainLayout = () => {
         const siteBlockedMsg = (
             <>
-                <h2>{site} blocked.</h2>
+                <h2>{site?.url} blocked.</h2>
                 <p>Do you want to go anyway?</p>
             </>
         );
@@ -107,8 +130,8 @@ export function LandingPage({ block = false }: { block: boolean }) {
                             placeholder='do you have any reason to go procrastinate?'
                             rows={10}
                             name='description'
-                            // value={}
-                            // onChange={}
+                            value={currentReason.content}
+                            onChange={updateReasonContent}
                         />
                         <button onClick={() => false}>
                             <Option type='small' title='GO' />
