@@ -8,7 +8,7 @@ import { Settings } from './Settings';
 
 import style from './Settings.module.scss';
 
-interface IBlock {
+interface ISite {
     id: string;
     url: string;
 }
@@ -17,17 +17,17 @@ export function SettingsBlock() {
     const basePath = '/settings';
     const navigate = useNavigate();
 
-    const [blocks, setBlocks] = useState<IBlock[]>([]);
+    const [sites, setSites] = useState<ISite[]>([]);
 
     useEffect(() => {
-        api.get('/blocks').then(response => {
-            setBlocks(response.data);
+        api.get('/sites/config').then(response => {
+            setSites(response.data);
         });
-    }, ['blocks']);
+    }, ['sites']);
 
     return (
         <>
-            <h1>Settings » Blocks</h1>
+            <h1>Settings » Websites Block</h1>
             <Settings>
                 <button
                     className={style.goBackButton}
@@ -43,7 +43,7 @@ export function SettingsBlock() {
                     </div>
                 </div>
                 <div className={style.blockedSitesList}>
-                    {blocks.map(site => (
+                    {sites.map(site => (
                         <div className={style.blockedSiteWrapper}>
                             <input
                                 key={site.id}

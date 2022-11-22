@@ -86,7 +86,7 @@ export function Router() {
                     }
                 >
                     <Route path='' element={<SettingsMain />} />
-                    <Route path='blocks' element={<SettingsBlock />} />
+                    <Route path='blocked-sites' element={<SettingsBlock />} />
                 </Route>
                 <Route
                     path='note'

@@ -9,8 +9,8 @@ export function SettingsMain() {
         <>
             <h1>Settings</h1>
             <Settings>
-                <Link to={`${basePath}/blocks`}>
-                    <Option title='Blocks' />
+                <Link to={`${basePath}/blocked-sites`}>
+                    <Option title='Websites Block' />
                 </Link>
             </Settings>
         </>
