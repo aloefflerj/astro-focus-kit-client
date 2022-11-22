@@ -1,17 +1,16 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { queryClient } from '../../common/utils/queryClient';
 import { Card } from '../../components/Card/Card';
 import { MiniCard } from '../../components/Card/MiniCard';
-import { api } from '../../services/api';
 import { useSitesApi } from '../../services/sites/useSitesApi';
 import { Option } from '../Sidebar/Option';
 import { Settings } from './Settings';
 
 import style from './Settings.module.scss';
 
-interface ISite {
+export interface ISite {
     id: string;
     url: string;
 }
@@ -23,7 +22,8 @@ export function SettingsBlock() {
     const [sites, setSites] = useState<ISite[]>([]);
     const [newSite, setNewSite] = useState<string>('');
 
-    const { getSitesConfig, createNewSiteConfig } = useSitesApi();
+    const { getSitesConfig, createNewSiteConfig, removeSiteConfig } =
+        useSitesApi();
 
     const onSuccess = (queriedSites: ISite[]) => setSites(queriedSites);
 
@@ -46,6 +46,20 @@ export function SettingsBlock() {
             }
         );
 
+    const {
+        mutate: removeSiteMutation,
+        isLoading: isLoadingSitesAfterRemoval,
+    } = useMutation(
+        (site: ISite) => {
+            return removeSiteConfig(site);
+        },
+        {
+            onSuccess: () => {
+                queryClient.invalidateQueries(['sites']);
+            },
+        }
+    );
+
     const handleNewSiteInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewSite(e.target.value);
     };
@@ -53,7 +67,11 @@ export function SettingsBlock() {
     return (
         <div
             className={
-                isFetchingSites || isLoadingSitesAfterAddition ? 'loading' : ''
+                isFetchingSites ||
+                isLoadingSitesAfterAddition ||
+                isLoadingSitesAfterRemoval
+                    ? 'loading'
+                    : ''
             }
         >
             <h1>Settings » Websites Block</h1>
@@ -81,7 +99,7 @@ export function SettingsBlock() {
                                 placeholder='website to block'
                                 value={site.url}
                             />
-                            <div>
+                            <div onClick={() => removeSiteMutation(site)}>
                                 <MiniCard type='button' active={false}>
                                     -
                                 </MiniCard>
