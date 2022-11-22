@@ -1,6 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { queryClient } from '../../common/utils/queryClient';
 import { Card } from '../../components/Card/Card';
 import { MiniCard } from '../../components/Card/MiniCard';
 import { api } from '../../services/api';
@@ -20,7 +21,9 @@ export function SettingsBlock() {
     const navigate = useNavigate();
 
     const [sites, setSites] = useState<ISite[]>([]);
-    const { getSitesConfig } = useSitesApi();
+    const [newSite, setNewSite] = useState<string>('');
+
+    const { getSitesConfig, createNewSiteConfig } = useSitesApi();
 
     const onSuccess = (queriedSites: ISite[]) => setSites(queriedSites);
 
@@ -30,8 +33,29 @@ export function SettingsBlock() {
         { onSuccess, refetchOnWindowFocus: false }
     );
 
+    const { mutate: addSiteMutation, isLoading: isLoadingSitesAfterAddition } =
+        useMutation(
+            (newSiteUrl: string) => {
+                return createNewSiteConfig(newSiteUrl);
+            },
+            {
+                onSuccess: () => {
+                    queryClient.invalidateQueries(['sites']);
+                    setNewSite('');
+                },
+            }
+        );
+
+    const handleNewSiteInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewSite(e.target.value);
+    };
+
     return (
-        <div className={isFetchingSites ? 'loading' : ''}>
+        <div
+            className={
+                isFetchingSites || isLoadingSitesAfterAddition ? 'loading' : ''
+            }
+        >
             <h1>Settings » Websites Block</h1>
             <Settings>
                 <button
@@ -69,8 +93,10 @@ export function SettingsBlock() {
                             type='text'
                             className='input'
                             placeholder='website to block'
+                            value={newSite}
+                            onChange={handleNewSiteInput}
                         />
-                        <div>
+                        <div onClick={() => addSiteMutation(newSite)}>
                             <MiniCard type='button' active={false}>
                                 +
                             </MiniCard>
