@@ -1,8 +1,10 @@
+import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '../../components/Card/Card';
 import { MiniCard } from '../../components/Card/MiniCard';
 import { api } from '../../services/api';
+import { useSitesApi } from '../../services/sites/useSitesApi';
 import { Option } from '../Sidebar/Option';
 import { Settings } from './Settings';
 
@@ -18,15 +20,18 @@ export function SettingsBlock() {
     const navigate = useNavigate();
 
     const [sites, setSites] = useState<ISite[]>([]);
+    const { getSitesConfig } = useSitesApi();
 
-    useEffect(() => {
-        api.get('/sites/config').then(response => {
-            setSites(response.data);
-        });
-    }, ['sites']);
+    const onSuccess = (queriedSites: ISite[]) => setSites(queriedSites);
+
+    const { isFetching: isFetchingSites } = useQuery<ISite[]>(
+        ['sites'],
+        async () => getSitesConfig(),
+        { onSuccess, refetchOnWindowFocus: false }
+    );
 
     return (
-        <>
+        <div className={isFetchingSites ? 'loading' : ''}>
             <h1>Settings » Websites Block</h1>
             <Settings>
                 <button
@@ -73,6 +78,6 @@ export function SettingsBlock() {
                     </div>
                 </div>
             </Settings>
-        </>
+        </div>
     );
 }
