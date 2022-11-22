@@ -1,11 +1,12 @@
+import { AxiosResponse } from 'axios';
 import { IReason } from '../../common/types';
 import { api } from '../api';
 
-const resource = '/sites/config';
+const resource = '/reasons';
 
 export const useReasonsApi = () => ({
-    answerNewReason: async (reason: IReason) => {
+    answerNewReason: async (reason: IReason): Promise<AxiosResponse> => {
         const response = await api.post(resource, reason);
-        return response.data;
+        return response;
     },
 });

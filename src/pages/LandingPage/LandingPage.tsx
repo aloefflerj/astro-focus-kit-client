@@ -12,6 +12,7 @@ import { useModalContext } from '../../hooks/useModalContext';
 import { IReason } from '../../common/types';
 import moment from 'moment';
 import { useSitesApi } from '../../services/sites/useSitesApi';
+import { useReasonsApi } from '../../services/reasons/useReasonsApi';
 
 interface IQuote {
     quote?: string;
@@ -27,6 +28,7 @@ export function LandingPage({ block = false }: { block: boolean }) {
     const { siteId } = useParams();
     const navigate = useNavigate();
     const { getSiteConfig } = useSitesApi();
+    const { answerNewReason } = useReasonsApi();
 
     const [site, setSite] = useState({
         url: 'Site',
@@ -36,7 +38,7 @@ export function LandingPage({ block = false }: { block: boolean }) {
     const [currentReason, setCurrentReason] = useState<IReason>({
         content: '',
         reasonDateTime: moment().toISOString(),
-        site: site?.url,
+        site: siteId === undefined ? '' : siteId,
     });
 
     const { openModal } = useModalContext();
@@ -50,9 +52,23 @@ export function LandingPage({ block = false }: { block: boolean }) {
     }, ['quote', 'site']);
 
     const redirectToHome = () => navigate('/');
+    const handleSiteUrl = (siteUrl: string): string => {
+        if (!/^https?:\/\//i.test(siteUrl)) {
+            siteUrl = 'http://' + siteUrl;
+        }
+        return siteUrl;
+    };
+    const redirectToSite = () => (window.location.href = handleSiteUrl(site.url));
 
     const updateReasonContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setCurrentReason({ ...currentReason, content: e.target.value });
+    };
+
+    const registerNewReason = async () => {
+        const { status } = await answerNewReason(currentReason);
+        if (status === 201) {
+            return redirectToSite();
+        }
     };
 
     const renderMainLayout = () => {
@@ -133,7 +149,7 @@ export function LandingPage({ block = false }: { block: boolean }) {
                             value={currentReason.content}
                             onChange={updateReasonContent}
                         />
-                        <button onClick={() => false}>
+                        <button onClick={registerNewReason}>
                             <Option type='small' title='GO' />
                         </button>
                     </div>
