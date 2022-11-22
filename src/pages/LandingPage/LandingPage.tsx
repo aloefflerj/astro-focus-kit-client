@@ -101,10 +101,10 @@ export function LandingPage({ block = false }: { block: boolean }) {
                 {renderMainLayout()}
                 <Modal modalId='goAnyway' overlay='blockPageOverlay'>
                     <div className={style.goAnywayModalContent}>
-                        <h3>Why do you wanna go?</h3>
+                        <h3>Why do You Want to Procrastinate?</h3>
                         <textarea
                             className='input'
-                            placeholder='why procrastinate? :('
+                            placeholder='do you have any reason to go procrastinate?'
                             rows={10}
                             name='description'
                             // value={}
