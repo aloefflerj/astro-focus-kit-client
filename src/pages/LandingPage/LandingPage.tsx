@@ -13,6 +13,7 @@ import { IReason } from '../../common/types';
 import moment from 'moment';
 import { useSitesApi } from '../../services/sites/useSitesApi';
 import { useReasonsApi } from '../../services/reasons/useReasonsApi';
+import { useSessionsApi } from '../../services/sessions/useSessionsApi';
 
 interface IQuote {
     quote?: string;
@@ -27,8 +28,11 @@ export function LandingPage({ block = false }: { block: boolean }) {
 
     const { siteId } = useParams();
     const navigate = useNavigate();
+
     const { getSiteConfig } = useSitesApi();
     const { answerNewReason } = useReasonsApi();
+    const { changeStatusToProcrastinating, changeStatusToFocusing } =
+        useSessionsApi();
 
     const [site, setSite] = useState({
         url: 'Site',
@@ -45,20 +49,30 @@ export function LandingPage({ block = false }: { block: boolean }) {
 
     useEffect(() => {
         api.get('/quotes').then(({ data }) => setQuote(data));
+
         if (siteId === undefined) return;
+
         getSiteConfig(siteId).then(site => {
             setSite({ url: site.url, id: site.id });
         });
     }, ['quote', 'site']);
 
-    const redirectToHome = () => navigate('/');
     const handleSiteUrl = (siteUrl: string): string => {
         if (!/^https?:\/\//i.test(siteUrl)) {
             siteUrl = 'http://' + siteUrl;
         }
         return siteUrl;
     };
-    const redirectToSite = () => (window.location.href = handleSiteUrl(site.url));
+
+    const redirectToHome = () => navigate('/');
+
+    const goToTasks = async () => {
+        const { status } = await changeStatusToFocusing();
+        if (status === 204) navigate('/');
+    };
+
+    const redirectToSite = () =>
+        (window.location.href = handleSiteUrl(site.url));
 
     const updateReasonContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setCurrentReason({ ...currentReason, content: e.target.value });
@@ -67,7 +81,9 @@ export function LandingPage({ block = false }: { block: boolean }) {
     const registerNewReason = async () => {
         const { status } = await answerNewReason(currentReason);
         if (status === 201) {
-            return redirectToSite();
+            const { status: sessionStatus } =
+                await changeStatusToProcrastinating();
+            if (sessionStatus === 204) return redirectToSite();
         }
     };
 
@@ -97,7 +113,7 @@ export function LandingPage({ block = false }: { block: boolean }) {
                 <div className={style.emptyElementMiddle}></div>
                 <div className={style.buttonWrapper}>
                     <div className={style.shineOutline}>
-                        <button onClick={() => redirectToHome()}>
+                        <button onClick={() => goToTasks()}>
                             <Option title='Go Back to Tasks' />
                         </button>
                     </div>
