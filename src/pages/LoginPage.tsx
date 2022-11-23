@@ -23,11 +23,10 @@ export const LoginPage = () => {
     const handleLogin = async () => {
         try {
             await auth.authenticate(email, password);
-
             navigate('/tasks');
         } catch (error) {
             alert(
-                'Invalid email or password, try: eve.holt@reqres.in and pass: cityslicka'
+                'Invalid email or password'
             );
         }
     };
