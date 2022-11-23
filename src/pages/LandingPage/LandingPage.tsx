@@ -44,11 +44,11 @@ export function LandingPage({ block = false }: { block: boolean }) {
     const { openModal } = useModalContext();
 
     useEffect(() => {
+        api.get('/quotes').then(({ data }) => setQuote(data));
         if (siteId === undefined) return;
         getSiteConfig(siteId).then(site => {
             setSite({ url: site.url, id: site.id });
         });
-        api.get('/quotes').then(({ data }) => setQuote(data));
     }, ['quote', 'site']);
 
     const redirectToHome = () => navigate('/');
