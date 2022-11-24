@@ -1,0 +1,19 @@
+.cardContent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.weekTitle {
+    display: flex;
+    align-items: center;
+    margin: 12px 0 12px 0;
+}
+
+.tasksStatusWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.tasksStatus {
+    padding-left: 12px;
+}

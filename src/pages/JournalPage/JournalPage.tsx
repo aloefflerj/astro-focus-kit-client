@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
 import { useState } from 'react';
-import { ITask } from '../common/types';
-import { getWeekTitleFromTaskDay } from '../common/utils/getWeekTitleFromTaskDay';
-import { Card } from '../components/Card/Card';
-import { Timeline } from '../components/Timeline/Timeline';
-import { TimelineElement } from '../components/Timeline/TimelineElement';
-import { useTasksApi } from '../services/tasks/useTasksApi';
-import { DashboardLayoutPage } from './DashboardLayoutPage';
+import { ITask } from '../../common/types';
+import { getWeekTitleFromTaskDay } from '../../common/utils/getWeekTitleFromTaskDay';
+import { Timeline } from '../../components/Timeline/Timeline';
+import { TimelineElement } from '../../components/Timeline/TimelineElement';
+import { useTasksApi } from '../../services/tasks/useTasksApi';
+import { DashboardLayoutPage } from '../DashboardLayoutPage';
+import style from './JournalPage.module.scss';
 
 export function JournalPage() {
     const [showDetails, setShowDetails] = useState(false);
@@ -63,25 +63,15 @@ export function JournalPage() {
                         setShowDetails={setShowDetails}
                         key={index}
                     >
-                        <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                            }}
-                        >
-                            <span style={{ display: 'flex', alignItems: 'center'}}>{week}</span>
+                        <div className={style.cardContent}>
+                            <span className={style.weekTitle}>{week}</span>
                             {showDetails && (
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                    }}
-                                >
-                                    <span style={{ paddingLeft: '12px' }}>
+                                <div className={style.tasksStatusWrapper}>
+                                    <span className={style.tasksStatus}>
                                         Finished tasks:{' '}
                                         {getFinishedTasksQty(week)}
                                     </span>
-                                    <span style={{ paddingLeft: '12px' }}>
+                                    <span className={style.tasksStatus}>
                                         Unfinished tasks:{' '}
                                         {getUnfinishedTasksQty(week)}
                                     </span>

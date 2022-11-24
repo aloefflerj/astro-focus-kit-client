@@ -4,7 +4,7 @@ import { ProtectedLayout } from '../components/ProtectedLayout/ProtectedLayout';
 import { SettingsBlock } from '../elements/Settings/SettingsBlock';
 import { SettingsMain } from '../elements/Settings/SettingsMain';
 import { DashboardLayoutPage } from '../pages/DashboardLayoutPage';
-import { JournalPage } from '../pages/JournalPage';
+import { JournalPage } from '../pages/JournalPage/JournalPage';
 import { LandingPage } from '../pages/LandingPage/LandingPage';
 import { LoginPage } from '../pages/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage';
