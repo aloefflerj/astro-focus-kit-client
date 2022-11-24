@@ -43,3 +43,16 @@
         padding: 0;
     }
 }
+
+.modalLarge {
+    z-index: 100000;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%,-50%);
+    width: 80%;
+    & h3 {
+        margin: 0 0 20px 0;
+        padding: 0;
+    }
+}

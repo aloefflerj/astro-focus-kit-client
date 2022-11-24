@@ -40,19 +40,19 @@ export function JournalPage() {
         { onSuccess, refetchOnWindowFocus: false }
     );
 
-    const getFinishedTasksQty = (week: string): number =>
+    const getFinishedTasks = (week: string): ITask[] =>
         tasks.filter(task => {
             return (
                 getWeekTitleFromTaskDay(task) === week && task.status === 'done'
             );
-        }).length;
+        });
 
-    const getUnfinishedTasksQty = (week: string): number =>
+    const getUnfinishedTasks = (week: string): ITask[] =>
         tasks.filter(task => {
             return (
                 getWeekTitleFromTaskDay(task) === week && task.status !== 'done'
             );
-        }).length;
+        });
 
     return (
         <DashboardLayoutPage loading={isFetchingTasks}>
@@ -63,6 +63,8 @@ export function JournalPage() {
                         setElementVisibleByIndex={setElementVisibleByIndex}
                         key={index}
                         index={index}
+                        finishedTasks={getFinishedTasks(week)}
+                        unfinishedTasks={getUnfinishedTasks(week)}
                     >
                         <div className={style.cardContent}>
                             <span className={style.weekTitle}>{week}</span>
@@ -70,11 +72,11 @@ export function JournalPage() {
                                 <div className={style.tasksStatusWrapper}>
                                     <span className={style.tasksStatus}>
                                         Finished tasks:{' '}
-                                        {getFinishedTasksQty(week)}
+                                        {getFinishedTasks(week).length}
                                     </span>
                                     <span className={style.tasksStatus}>
                                         Unfinished tasks:{' '}
-                                        {getUnfinishedTasksQty(week)}
+                                        {getUnfinishedTasks(week).length}
                                     </span>
                                 </div>
                             )}

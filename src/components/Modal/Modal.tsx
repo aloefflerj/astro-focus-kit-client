@@ -4,11 +4,13 @@ import style from './Modal.module.scss';
 export function Modal({
     children,
     modalId,
-    overlay = 'default'
+    overlay = 'default',
+    large = false,
 }: {
     children: React.ReactNode;
     modalId: string;
-    overlay?: 'default' | 'blockPageOverlay'
+    overlay?: 'default' | 'blockPageOverlay';
+    large?: boolean;
 }): JSX.Element {
     const {
         modal: { visible, contextId },
@@ -18,7 +20,11 @@ export function Modal({
     return (
         <>
             <div
-                className={` ${overlay === 'default' ? style.overlay : style.blockPageOverlay } ${
+                className={` ${
+                    overlay === 'default'
+                        ? style.overlay
+                        : style.blockPageOverlay
+                } ${
                     visible && (modalId === contextId || contextId === 'all')
                         ? style.modalOpened
                         : style.modalClosed
@@ -30,7 +36,7 @@ export function Modal({
                     visible && (modalId === contextId || contextId === 'all')
                         ? style.modalOpened
                         : style.modalClosed
-                } ${style.modal}`}
+                } ${large ? style.modalLarge : style.modal}`}
             >
                 <div className='cardStyle'>
                     <span className='cardStyleTop'>{children}</span>
