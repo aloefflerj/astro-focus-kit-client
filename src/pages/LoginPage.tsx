@@ -5,14 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import { Option } from '../elements/Sidebar/Option';
 import star from '../assets/img/star.svg';
 import { Card } from '../components/Card/Card';
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useKeyDown } from '../hooks/useKeyDown';
 
 export const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const auth = useAuth();
     const navigate = useNavigate();
+
+    const { handleOnEnter } = useKeyDown();
 
     const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
@@ -52,7 +53,6 @@ export const LoginPage = () => {
             </Card>
             
             <p>Launching productivity to the stars</p>
-            <FontAwesomeIcon icon={faHome} />
             
             <input
                 style={style}
@@ -60,6 +60,7 @@ export const LoginPage = () => {
                 value={email}
                 placeholder='Type your email'
                 onChange={handleEmailInput}
+                onKeyDown={e => handleOnEnter(e, handleLogin)}
             />
             <input
                 style={style}
@@ -67,6 +68,7 @@ export const LoginPage = () => {
                 value={password}
                 placeholder='Type your password'
                 onChange={handlePasswordInput}
+                onKeyDown={e => handleOnEnter(e, handleLogin)}
             />
 
             <button

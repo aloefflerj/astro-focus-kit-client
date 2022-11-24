@@ -6,7 +6,17 @@ export const useKeyDown = () => ({
         callbackFn: (...args: any[]) => void
     ) => {
         if (event.key === 'Enter') {
-            callbackFn()
+            callbackFn();
+        }
+    },
+    handleOnCtrlEnter: (
+        event:
+            | React.KeyboardEvent<HTMLInputElement>
+            | React.KeyboardEvent<HTMLTextAreaElement>,
+        callbackFn: (...args: any[]) => void
+    ) => {
+        if (event.key === 'Enter' && event.ctrlKey) {
+            callbackFn();
         }
     },
 });

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { queryClient } from '../../common/utils/queryClient';
 import { Card } from '../../components/Card/Card';
 import { MiniCard } from '../../components/Card/MiniCard';
+import { useKeyDown } from '../../hooks/useKeyDown';
 import { useSitesApi } from '../../services/sites/useSitesApi';
 import { Option } from '../Sidebar/Option';
 import { Settings } from './Settings';
@@ -18,6 +19,7 @@ export interface ISite {
 export function SettingsBlock() {
     const basePath = '/settings';
     const navigate = useNavigate();
+    const { handleOnEnter } = useKeyDown();
 
     const [sites, setSites] = useState<ISite[]>([]);
     const [newSite, setNewSite] = useState<string>('');
@@ -113,6 +115,7 @@ export function SettingsBlock() {
                             placeholder='website to block'
                             value={newSite}
                             onChange={handleNewSiteInput}
+                            onKeyDown={e => handleOnEnter(e, () => addSiteMutation(newSite))}
                         />
                         <div onClick={() => addSiteMutation(newSite)}>
                             <MiniCard type='button' active={false}>

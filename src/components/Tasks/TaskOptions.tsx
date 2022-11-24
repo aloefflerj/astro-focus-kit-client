@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { INewTaskRequest, IUpdateTaskRequest } from '../../common/types';
 import { queryClient } from '../../common/utils/queryClient';
 import { Option } from '../../elements/Sidebar/Option';
+import { useKeyDown } from '../../hooks/useKeyDown';
 import { useModalContext } from '../../hooks/useModalContext';
 import { api } from '../../services/api';
 import style from './TaskOptions.module.scss';
@@ -18,6 +19,7 @@ export function TaskOptions({
     const [title, setTitle] = useState(taskRequest.title ?? '');
     const [description, setDescription] = useState(taskRequest.description ?? '');
     const { closeModal } = useModalContext();
+    const { handleOnEnter, handleOnCtrlEnter } = useKeyDown();
 
     const handleTitleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
@@ -102,6 +104,7 @@ export function TaskOptions({
                 name='title'
                 value={title}
                 onChange={handleTitleInput}
+                onKeyDown={e => handleOnEnter(e, handleTaskForm)}
             />
             <textarea
                 className='input'
@@ -110,6 +113,7 @@ export function TaskOptions({
                 name='description'
                 value={description}
                 onChange={handleDescriptionInput}
+                onKeyDown={e => handleOnCtrlEnter(e, handleTaskForm)}
             />
             <button onClick={handleTaskForm}>
                 <Option type='small' title='ADD' />
