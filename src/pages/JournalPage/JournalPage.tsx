@@ -10,7 +10,7 @@ import { DashboardLayoutPage } from '../DashboardLayoutPage';
 import style from './JournalPage.module.scss';
 
 export function JournalPage() {
-    const [showDetails, setShowDetails] = useState(false);
+    const [elementVisibleByIndex, setElementVisibleByIndex] = useState<number | null>(null);
     const { getTasks } = useTasksApi();
     const [tasks, setTasks] = useState<ITask[]>([]);
     const [weeks, setWeeks] = useState<string[]>([]);
@@ -60,12 +60,13 @@ export function JournalPage() {
             <Timeline>
                 {weeks.map((week, index) => (
                     <TimelineElement
-                        setShowDetails={setShowDetails}
+                        setElementVisibleByIndex={setElementVisibleByIndex}
                         key={index}
+                        index={index}
                     >
                         <div className={style.cardContent}>
                             <span className={style.weekTitle}>{week}</span>
-                            {showDetails && (
+                            {index === elementVisibleByIndex && (
                                 <div className={style.tasksStatusWrapper}>
                                     <span className={style.tasksStatus}>
                                         Finished tasks:{' '}

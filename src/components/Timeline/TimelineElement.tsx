@@ -6,10 +6,12 @@ import { Modal } from '../Modal/Modal';
 
 export function TimelineElement({
     children,
-    setShowDetails,
+    setElementVisibleByIndex,
+    index
 }: {
     children: JSX.Element | JSX.Element[] | string;
-    setShowDetails: React.Dispatch<React.SetStateAction<boolean>>;
+    setElementVisibleByIndex: React.Dispatch<React.SetStateAction<number | null>>;
+    index: number;
 }) {
     const { openModal } = useModalContext();
     return (
@@ -21,8 +23,8 @@ export function TimelineElement({
                 <div className={style.cardElement}>
                     <div
                         className='cardStyleHover'
-                        onMouseEnter={() => setShowDetails(true)}
-                        onMouseLeave={() => setShowDetails(false)}
+                        onMouseEnter={() => setElementVisibleByIndex(index)}
+                        onMouseLeave={() => setElementVisibleByIndex(null)}
                         onClick={e => openModal(e, 'history-details')}
                     >
                         <span className='cardStyleTop'>{children}</span>
