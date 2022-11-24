@@ -55,7 +55,7 @@ export function JournalPage() {
         }).length;
 
     return (
-        <DashboardLayoutPage>
+        <DashboardLayoutPage loading={isFetchingTasks}>
             <h1>Your Tasks by Week</h1>
             <Timeline>
                 {weeks.map((week, index) => (
