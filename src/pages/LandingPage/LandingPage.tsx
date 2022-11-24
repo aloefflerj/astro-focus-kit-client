@@ -26,6 +26,8 @@ export function LandingPage({ block = false }: { block: boolean }) {
         author: '',
     });
 
+    const [loading, setLoading] = useState(false);
+
     const { siteId } = useParams();
     const navigate = useNavigate();
 
@@ -48,13 +50,21 @@ export function LandingPage({ block = false }: { block: boolean }) {
     const { openModal } = useModalContext();
 
     useEffect(() => {
-        api.get('/quotes').then(({ data }) => setQuote(data));
+        setLoading(true);
+        api.get('/quotes')
+            .then(({ data }) => {
+                setQuote(data);
+            })
+            .finally(() => setLoading(false));
 
         if (siteId === undefined) return;
 
-        getSiteConfig(siteId).then(site => {
-            setSite({ url: site.url, id: site.id });
-        });
+        setLoading(true);
+        getSiteConfig(siteId)
+            .then(site => {
+                setSite({ url: site.url, id: site.id });
+            })
+            .finally(() => setLoading(false));
     }, ['quote', 'site']);
 
     const handleSiteUrl = (siteUrl: string): string => {
@@ -67,8 +77,10 @@ export function LandingPage({ block = false }: { block: boolean }) {
     const redirectToHome = () => navigate('/');
 
     const goToTasks = async () => {
+        setLoading(true);
         const { status } = await changeStatusToFocusing();
         if (status === 204) navigate('/');
+        setLoading(false);
     };
 
     const redirectToSite = () =>
@@ -79,12 +91,14 @@ export function LandingPage({ block = false }: { block: boolean }) {
     };
 
     const registerNewReason = async () => {
+        setLoading(true);
         const { status } = await answerNewReason(currentReason);
         if (status === 201) {
             const { status: sessionStatus } =
                 await changeStatusToProcrastinating();
             if (sessionStatus === 204) return redirectToSite();
         }
+        setLoading(false);
     };
 
     const renderMainLayout = () => {
@@ -148,7 +162,7 @@ export function LandingPage({ block = false }: { block: boolean }) {
     };
 
     return (
-        <CommonLayoutPage>
+        <CommonLayoutPage loading={loading}>
             <div className={`${style.landingPage} landingPage`}>
                 <button className={style.goBackButton} onClick={redirectToHome}>
                     <Option title='«' />
