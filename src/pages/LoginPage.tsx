@@ -10,6 +10,8 @@ import { useKeyDown } from '../hooks/useKeyDown';
 export const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+
     const auth = useAuth();
     const navigate = useNavigate();
 
@@ -24,15 +26,18 @@ export const LoginPage = () => {
     };
 
     const handleLogin = async () => {
+        setLoading(true);
         try {
             await auth.authenticate(email, password);
             navigate('/tasks');
         } catch (error) {
-            alert(
-                'Invalid email or password'
-            );
+            alert('Invalid email or password');
         }
+        setLoading(false);
     };
+
+    const handleLoadingState = () => (loading ? 'loading' : '');
+
     const style = {
         borderRadius: '4px',
         border: '2px solid #464651',
@@ -47,13 +52,13 @@ export const LoginPage = () => {
     return (
         <CommonLayoutPage>
             <Card type='logoLogin'>
-                <img src={star} alt='astro-focus-kit-logo' />
-                <h1>ASTRO FOCUS KIT</h1>
-                <img src={star} alt='astro-focus-kit-logo' />
+                <img src={star} alt='astro-focus-kit-logo' className={handleLoadingState()} />
+                <h1 className={handleLoadingState()}>ASTRO FOCUS KIT</h1>
+                <img src={star} alt='astro-focus-kit-logo' className={handleLoadingState()} />
             </Card>
-            
-            <p>Launching productivity to the stars</p>
-            
+
+            <p className={handleLoadingState()}>Launching productivity to the stars</p>
+
             <input
                 style={style}
                 type='text'
@@ -61,6 +66,7 @@ export const LoginPage = () => {
                 placeholder='Type your email'
                 onChange={handleEmailInput}
                 onKeyDown={e => handleOnEnter(e, handleLogin)}
+                className={handleLoadingState()}
             />
             <input
                 style={style}
@@ -69,6 +75,7 @@ export const LoginPage = () => {
                 placeholder='Type your password'
                 onChange={handlePasswordInput}
                 onKeyDown={e => handleOnEnter(e, handleLogin)}
+                className={handleLoadingState()}
             />
 
             <button
@@ -78,6 +85,7 @@ export const LoginPage = () => {
                     border: 'none',
                     paddingTop: '12px',
                 }}
+                className={handleLoadingState()}
             >
                 <Option type='small' title='LOGIN' />
             </button>
