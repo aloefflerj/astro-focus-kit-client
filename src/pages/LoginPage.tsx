@@ -38,17 +38,6 @@ export const LoginPage = () => {
 
     const handleLoadingState = () => (loading ? 'loading' : '');
 
-    const style = {
-        borderRadius: '4px',
-        border: '2px solid #464651',
-        padding: '8px 10px',
-        fontFamily: 'Averia Libre, cursive',
-        marginTop: '8px',
-        color: '#464651',
-        boxShadow: '0px -3px #464651',
-        backgroundColor: '#f0c8ac',
-        fontSize: '18px',
-    };
     return (
         <CommonLayoutPage>
             <Card type='logoLogin'>
@@ -60,31 +49,24 @@ export const LoginPage = () => {
             <p className={handleLoadingState()}>Launching productivity to the stars</p>
 
             <input
-                style={style}
                 type='text'
                 value={email}
                 placeholder='Type your email'
                 onChange={handleEmailInput}
                 onKeyDown={e => handleOnEnter(e, handleLogin)}
-                className={handleLoadingState()}
+                className={`${handleLoadingState()} input`}
             />
             <input
-                style={style}
                 type='password'
                 value={password}
                 placeholder='Type your password'
                 onChange={handlePasswordInput}
                 onKeyDown={e => handleOnEnter(e, handleLogin)}
-                className={handleLoadingState()}
+                className={`${handleLoadingState()} input`}
             />
 
             <button
                 onClick={handleLogin}
-                style={{
-                    background: 'none',
-                    border: 'none',
-                    paddingTop: '12px',
-                }}
                 className={handleLoadingState()}
             >
                 <Option type='small' title='LOGIN' />

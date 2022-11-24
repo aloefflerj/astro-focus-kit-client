@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthenticatedLayout } from '../components/ProtectedLayout/AuthenticatedLayout';
 import { ProtectedLayout } from '../components/ProtectedLayout/ProtectedLayout';
