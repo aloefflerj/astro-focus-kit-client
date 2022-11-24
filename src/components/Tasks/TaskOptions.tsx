@@ -55,7 +55,6 @@ export function TaskOptions({
         },
         {
             onSuccess: () => {
-                clearFiels();
                 closeModal();
                 queryClient.invalidateQueries(['tasks']);
             },
