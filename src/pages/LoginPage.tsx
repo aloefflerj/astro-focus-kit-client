@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { Option } from '../elements/Sidebar/Option';
 import star from '../assets/img/star.svg';
 import { Card } from '../components/Card/Card';
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -50,6 +52,7 @@ export const LoginPage = () => {
             </Card>
             
             <p>Launching productivity to the stars</p>
+            <FontAwesomeIcon icon={faHome} />
             
             <input
                 style={style}

@@ -1,6 +1,8 @@
 import { Draggable } from '@hello-pangea/dnd';
-import style from './Task.module.scss'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faEllipsis } from "@fortawesome/free-solid-svg-icons";
 
+import style from './Task.module.scss'
 import { Card } from '../Card/Card';
 import { CardFooter } from '../Card/CardFooter';
 import { MiniCard } from '../Card/MiniCard';
@@ -13,6 +15,7 @@ import { api } from '../../services/api';
 import { queryClient } from '../../common/utils/queryClient';
 import { TaskOptions } from './TaskOptions';
 import { ITask } from '../../common/types';
+
 
 export function Task({ index, task }: { index: number; task: ITask }) {
   const { openModal, closeModal } = useModalContext();
@@ -57,7 +60,7 @@ export function Task({ index, task }: { index: number; task: ITask }) {
                   className={style.taskButton}
                   onClick={e => openModal(e, `update-task-${id}`)}
                 >
-                    ...
+                  <FontAwesomeIcon icon={faEllipsis} />
                 </span>
               </MiniCard>
               <MiniCard active={status === 'done'} type='box'>
@@ -65,7 +68,7 @@ export function Task({ index, task }: { index: number; task: ITask }) {
                   className={style.taskButton}
                   onClick={() => finishTaskMutation.mutate()}
                 >
-                  {status === 'done' ? <>&#10004;</> : <>&nbsp;&nbsp;&nbsp;</>}
+                  {status === 'done' ? <><FontAwesomeIcon icon={faCheck} /></> : <>&nbsp;&nbsp;&nbsp;</>}
                 </span>
               </MiniCard>
             </CardFooter>
