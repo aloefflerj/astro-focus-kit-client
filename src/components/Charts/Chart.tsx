@@ -2,16 +2,45 @@ import { ResponsiveContainer, PieChart, Pie, PieLabel, Cell } from 'recharts';
 
 export function Chart({
     data,
-    colors,
+    colors = [],
     label,
     titleContent,
 }: {
     data?: any[] | undefined;
-    colors: string[];
+    colors?: string[];
     label?: PieLabel<any> | undefined;
     titleContent: JSX.Element | JSX.Element[] | string | undefined;
 }) {
     const outlineColor = '#464651';
+
+    const defaultChartColors = [
+        '#6A6A89',
+        '#7483d0',
+        '#AAB3E1',
+        '#D5D9EC',
+        '#f09a82',
+        '#F1B08B',
+        '#E8CDAE',
+        '#F0C8AC',
+        '#94CEA7',
+        '#B5DCC2',
+        '#85C69A',
+        '#659875',
+        '#6A6A89',
+        '#7483d0',
+        '#AAB3E1',
+        '#D5D9EC',
+        '#f09a82',
+        '#F1B08B',
+        '#E8CDAE',
+        '#F0C8AC',
+        '#94CEA7',
+        '#B5DCC2',
+        '#85C69A',
+        '#659875',
+    ];
+
+    const selectedColors: string[] = colors.length > 0 ? colors : defaultChartColors;
 
     const renderCustomizedLabel = ({
         cx,
@@ -42,7 +71,7 @@ export function Chart({
             <text
                 x={x}
                 y={y}
-                fill='#464651'
+                fill={outlineColor}
                 textAnchor={x > cx ? 'start' : 'end'}
                 dominantBaseline='central'
             >
@@ -82,11 +111,11 @@ export function Chart({
                     dataKey='value'
                     stroke={outlineColor}
                 >
-                    {data?.map((entry, index) => (
+                    {data?.map((_, index) => (
                         <>
                             <Cell
                                 key={`cell-${index}`}
-                                fill={colors[index % colors.length]}
+                                fill={selectedColors[index % selectedColors.length]}
                                 stroke={outlineColor}
                             />
                         </>
