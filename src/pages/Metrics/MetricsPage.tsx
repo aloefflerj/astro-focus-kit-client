@@ -60,6 +60,7 @@ export function MetricsPage() {
             handleLeastProductiveHours(queriedReasons);
         setUnproductiveHours(unproductiveHoursData);
     };
+    
     const { isFetching: isFetchingTasks } = useQuery<ITask[]>(
         ['tasks'],
         async () => getTasks(),

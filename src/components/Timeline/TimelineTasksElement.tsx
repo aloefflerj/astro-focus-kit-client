@@ -1,12 +1,11 @@
 import style from './TimelineElement.module.scss';
 import star from '../../assets/img/star.svg';
-import { MiniCard } from '../Card/MiniCard';
 import { useModalContext } from '../../hooks/useModalContext';
 import { Modal } from '../Modal/Modal';
 import { ITask } from '../../common/types';
 import { Card } from '../Card/Card';
 
-export function TimelineElement({
+export function TimelineTasksElement({
     children,
     setElementVisibleByIndex,
     index,
@@ -15,9 +14,9 @@ export function TimelineElement({
 }: {
     children: JSX.Element | JSX.Element[] | string;
     setElementVisibleByIndex: React.Dispatch<
-        React.SetStateAction<number | null>
+        React.SetStateAction<string | null>
     >;
-    index: number;
+    index: string;
     finishedTasks: ITask[];
     unfinishedTasks: ITask[];
 }) {
@@ -37,6 +36,12 @@ export function TimelineElement({
         if (finishedTasks.length === 0) return 0;
         const total = finishedTasks.length + unfinishedTasks.length;
         return parseFloat(((finishedTasks.length * 100) / total).toFixed(0));
+    };
+
+    const calcUnfinishedPercentage = (): number => {
+        if (unfinishedTasks.length === 0) return 0;
+        const total = unfinishedTasks.length + finishedTasks.length;
+        return parseFloat(((unfinishedTasks.length * 100) / total).toFixed(0));
     };
 
     return (
@@ -66,7 +71,7 @@ export function TimelineElement({
                         </div>
                     </div>
                     <div className={style.tasksStatusModalElement}>
-                        <h3>Unfinished</h3>
+                        <h3>Unfinished {calcUnfinishedPercentage()}%</h3>
                         <div className={style.tasksWrapper}>
                             {formatTasks(unfinishedTasks)}
                         </div>
