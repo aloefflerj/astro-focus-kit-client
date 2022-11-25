@@ -7,6 +7,7 @@ import { DashboardLayoutPage } from '../pages/DashboardLayoutPage';
 import { JournalPage } from '../pages/JournalPage/JournalPage';
 import { LandingPage } from '../pages/LandingPage/LandingPage';
 import { LoginPage } from '../pages/LoginPage';
+import { MetricsPage } from '../pages/Metrics/MetricsPage';
 import { RegisterPage } from '../pages/RegisterPage';
 import { SettingsPage } from '../pages/SettingsPage/SettingsPage';
 import { TasksPage } from '../pages/TasksPage';
@@ -70,9 +71,7 @@ export function Router() {
                     path='metrics'
                     element={
                         <ProtectedLayout>
-                            <DashboardLayoutPage>
-                                <h1>metrics</h1>
-                            </DashboardLayoutPage>
+                            <MetricsPage />
                         </ProtectedLayout>
                     }
                 />
