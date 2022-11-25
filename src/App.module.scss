@@ -1,4 +1,5 @@
 @import './common/css/variables.css';
+
 :global {
 
     body {
@@ -80,6 +81,26 @@
     .loading {
         pointer-events: none;
         opacity: 0.7;
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: var(--coral-light);
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: var(--coral-dark);
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--coral-dark);
     }
 
 }

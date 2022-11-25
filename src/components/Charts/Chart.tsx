@@ -9,7 +9,7 @@ export function Chart({
     data?: any[] | undefined;
     colors?: string[];
     label?: PieLabel<any> | undefined;
-    titleContent: JSX.Element | JSX.Element[] | string | undefined;
+    titleContent: string | undefined;
 }) {
     const outlineColor = '#464651';
 
@@ -40,7 +40,8 @@ export function Chart({
         '#659875',
     ];
 
-    const selectedColors: string[] = colors.length > 0 ? colors : defaultChartColors;
+    const selectedColors: string[] =
+        colors.length > 0 ? colors : defaultChartColors;
 
     const renderCustomizedLabel = ({
         cx,
@@ -81,8 +82,11 @@ export function Chart({
     };
 
     return (
-        <ResponsiveContainer width='100%' height='70%'>
-            <PieChart width={200} height={100} title='Most Productive Weekday'>
+        <ResponsiveContainer width={"90%"} height={350}>
+            <PieChart
+                margin={{ top: 20, bottom: 20 }}
+                title={titleContent !== undefined ? titleContent : ''}
+            >
                 <text
                     x='0'
                     y='0'
@@ -90,15 +94,18 @@ export function Chart({
                     fontSize='20'
                     fontWeight='bold'
                     fill={outlineColor}
+                    style={{ position: 'fixed' }}
                 >
                     {titleContent}
                 </text>
                 <Pie
+                    innerRadius={50}
+                    paddingAngle={5}
                     data={data}
                     cx='50%'
                     cy='50%'
                     labelLine={true}
-                    outerRadius={110}
+                    outerRadius={105}
                     label={
                         data === undefined
                             ? false
@@ -115,7 +122,11 @@ export function Chart({
                         <>
                             <Cell
                                 key={`cell-${index}`}
-                                fill={selectedColors[index % selectedColors.length]}
+                                fill={
+                                    selectedColors[
+                                        index % selectedColors.length
+                                    ]
+                                }
                                 stroke={outlineColor}
                             />
                         </>
