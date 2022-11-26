@@ -1,7 +1,7 @@
 import { ISite } from '../../elements/Settings/SettingsBlock';
 import { api } from '../api';
 
-const resource = '/sites/config';
+const resource = '/sites';
 
 export const useSitesApi = () => ({
     getSitesConfig: async () => {
