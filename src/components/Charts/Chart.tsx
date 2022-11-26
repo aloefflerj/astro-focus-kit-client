@@ -3,12 +3,10 @@ import { ResponsiveContainer, PieChart, Pie, PieLabel, Cell } from 'recharts';
 export function Chart({
     data,
     colors = [],
-    label,
     titleContent,
 }: {
     data?: any[] | undefined;
     colors?: string[];
-    label?: PieLabel<any> | undefined;
     titleContent: string | undefined;
 }) {
     const outlineColor = '#464651';
@@ -119,9 +117,8 @@ export function Chart({
                     stroke={outlineColor}
                 >
                     {data?.map((_, index) => (
-                        <>
                             <Cell
-                                key={`cell-${index}`}
+                                key={index}
                                 fill={
                                     selectedColors[
                                         index % selectedColors.length
@@ -129,7 +126,6 @@ export function Chart({
                                 }
                                 stroke={outlineColor}
                             />
-                        </>
                     ))}
                 </Pie>
             </PieChart>
