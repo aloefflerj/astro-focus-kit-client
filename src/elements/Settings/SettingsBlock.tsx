@@ -23,9 +23,14 @@ export function SettingsBlock() {
 
     const [sites, setSites] = useState<ISite[]>([]);
     const [newSite, setNewSite] = useState<string>('');
+    const [actionButton, setActionButton] = useState<string>('delete');
 
-    const { getSitesConfig, createNewSiteConfig, removeSiteConfig } =
-        useSitesApi();
+    const {
+        getSitesConfig,
+        createNewSiteConfig,
+        removeSiteConfig,
+        updateSiteConfig,
+    } = useSitesApi();
 
     const onSuccess = (queriedSites: ISite[]) => setSites(queriedSites);
 
@@ -53,7 +58,7 @@ export function SettingsBlock() {
         isLoading: isLoadingSitesAfterRemoval,
     } = useMutation(
         (site: ISite) => {
-            return removeSiteConfig(site);
+            return removeSiteConfig(site.id);
         },
         {
             onSuccess: () => {
@@ -62,8 +67,35 @@ export function SettingsBlock() {
         }
     );
 
+    const { mutate: updateSiteMutation, isLoading: isLoadingSitesAfterUpdate } =
+        useMutation(
+            (site: ISite) => {
+                return updateSiteConfig(site.id, site.url);
+            },
+            {
+                onSuccess: () => {
+                    queryClient.invalidateQueries(['sites']);
+                },
+            }
+        );
+
     const handleNewSiteInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewSite(e.target.value);
+    };
+
+    const handleUpdateSiteInput = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        siteId: string
+    ) => {
+        const updatedSites = sites.map(site => {
+            if (site.id === siteId) {
+                site.url = e.target.value;
+                setActionButton(`update-${site.id}`);
+            }
+            return site;
+        });
+
+        setSites(updatedSites);
     };
 
     return (
@@ -71,7 +103,8 @@ export function SettingsBlock() {
             className={
                 isFetchingSites ||
                 isLoadingSitesAfterAddition ||
-                isLoadingSitesAfterRemoval
+                isLoadingSitesAfterRemoval ||
+                isLoadingSitesAfterUpdate
                     ? 'loading'
                     : ''
             }
@@ -93,19 +126,35 @@ export function SettingsBlock() {
                 </div>
                 <div className={style.blockedSitesList}>
                     {sites.map(site => (
-                        <div className={style.blockedSiteWrapper}>
+                        <div className={style.blockedSiteWrapper} key={site.id}>
                             <input
-                                key={site.id}
                                 type='text'
                                 className='input'
                                 placeholder='website to block'
+                                onChange={e =>
+                                    handleUpdateSiteInput(e, site.id)
+                                }
+                                onKeyDown={e =>
+                                    handleOnEnter(e, () =>
+                                        actionButton === `update-${site.id}`
+                                            ? updateSiteMutation(site) : ''
+                                    )
+                                }
                                 value={site.url}
                             />
-                            <div onClick={() => removeSiteMutation(site)}>
-                                <MiniCard type='button' active={false}>
-                                    -
-                                </MiniCard>
-                            </div>
+                            {actionButton === `update-${site.id}` ? (
+                                <div onClick={() => updateSiteMutation(site)}>
+                                    <MiniCard type='button' active={false}>
+                                        +
+                                    </MiniCard>
+                                </div>
+                            ) : (
+                                <div onClick={() => removeSiteMutation(site)}>
+                                    <MiniCard type='button' active={false}>
+                                        -
+                                    </MiniCard>
+                                </div>
+                            )}
                         </div>
                     ))}
                     <div className={style.blockedSiteWrapper}>
@@ -115,7 +164,9 @@ export function SettingsBlock() {
                             placeholder='website to block'
                             value={newSite}
                             onChange={handleNewSiteInput}
-                            onKeyDown={e => handleOnEnter(e, () => addSiteMutation(newSite))}
+                            onKeyDown={e =>
+                                handleOnEnter(e, () => addSiteMutation(newSite))
+                            }
                         />
                         <div onClick={() => addSiteMutation(newSite)}>
                             <MiniCard type='button' active={false}>

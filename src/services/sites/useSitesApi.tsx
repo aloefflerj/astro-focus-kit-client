@@ -16,7 +16,10 @@ export const useSitesApi = () => ({
         const response = await api.post(resource, [{ url: url }]);
         return response.data;
     },
-    removeSiteConfig: async (site: ISite) => {
-        await api.delete(`${resource}/${site.id}`);
+    removeSiteConfig: async (siteId: string) => {
+        await api.delete(`${resource}/${siteId}`);
+    },
+    updateSiteConfig: async (siteId: string, url: string) => {
+        await api.patch(`${resource}/${siteId}`, [{ url: url }]);
     },
 });
