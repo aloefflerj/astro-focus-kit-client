@@ -45,8 +45,8 @@ export function TimelineReasonsElement({
                         <div className={style.reasonsWrapper}>
                             {reasons.map((reason, index) => {
                                 return (
-                                    <span>
-                                        {`${index}. ${
+                                    <span key={index}>
+                                        {`${index+1}. ${
                                             reason.content
                                         } - ${moment(
                                             reason.reasonDateTime
