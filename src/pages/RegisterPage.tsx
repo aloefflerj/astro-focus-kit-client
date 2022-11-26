@@ -6,15 +6,21 @@ import { CommonLayoutPage } from './CommonLayoutPage';
 import { Option } from '../elements/Sidebar/Option';
 import star from '../assets/img/star.svg';
 import { Card } from '../components/Card/Card';
-import { DashboardLayoutPage } from './DashboardLayoutPage';
+import { useKeyDown } from '../hooks/useKeyDown';
 
 export const RegisterPage = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmation, setConfirmation] = useState('');
+    const [loading, setLoading] = useState(false);
+
     const auth = useAuth();
     const navigate = useNavigate();
+    const { handleOnEnter } = useKeyDown();
+
+    const handleLoadingState = () => (loading ? 'loading' : '');
+
 
     const validatePassword = (password: string, confirmation: string): {valid: boolean, msg: string} => {
         const schema = new PasswordValidator();
@@ -80,6 +86,7 @@ export const RegisterPage = () => {
     };
 
     const handleRegister = async () => {
+        setLoading(true);
         const { valid, msg } = validatePassword(password, confirmation);
         if (!valid) {
             alert(msg);
@@ -95,69 +102,59 @@ export const RegisterPage = () => {
             navigate('/login');
         } catch (error) {
             alert((error as Error).message);
+        } finally {
+            setLoading(false)
         }
     };
-    const style = {
-        borderRadius: '4px',
-        border: '2px solid #464651',
-        padding: '8px 10px',
-        fontFamily: 'Averia Libre, cursive',
-        marginTop: '8px',
-        color: '#464651',
-        boxShadow: '0px -3px #464651',
-        backgroundColor: '#f0c8ac',
-        fontSize: '18px',
-    };
+
     return (
-        <DashboardLayoutPage>
+        <CommonLayoutPage>
             <Card type='logoLogin'>
                 <img src={star} alt='astro-focus-kit-logo' />
-                <h1>ASTRO FOCUS KIT</h1>
+                <h1 className={handleLoadingState()}>ASTRO FOCUS KIT</h1>
                 <img src={star} alt='astro-focus-kit-logo' />
             </Card>
-            <span style={{ marginTop: '16px', marginBottom: '8px' }}>
-                Launching Productivity to the Stars
-            </span>
+            <p >Launching Productivity to the Stars</p>
             <input
-                style={style}
+                className={`${handleLoadingState()} input`}
                 type='text'
                 value={name}
                 placeholder='What is your name?'
                 onChange={handleNameInput}
+                onKeyDown={e => handleOnEnter(e, handleRegister)}
             />
             <input
-                style={style}
+                className={`${handleLoadingState()} input`}
                 type='text'
                 value={email}
                 placeholder='Type your email'
                 onChange={handleEmailInput}
+                onKeyDown={e => handleOnEnter(e, handleRegister)}
             />
             <input
-                style={style}
+                className={`${handleLoadingState()} input`}
                 type='password'
                 value={password}
                 placeholder='Type your password'
                 onChange={handlePasswordInput}
+                onKeyDown={e => handleOnEnter(e, handleRegister)}
             />
 
             <input
-                style={style}
+                className={`${handleLoadingState()} input`}
                 type='password'
                 value={confirmation}
                 placeholder='Type the confirmation'
                 onChange={handleConfirmationInput}
+                onKeyDown={e => handleOnEnter(e, handleRegister)}
             />
 
             <button
                 onClick={handleRegister}
-                style={{
-                    background: 'none',
-                    border: 'none',
-                    paddingTop: '12px',
-                }}
+                className={handleLoadingState()}
             >
                 <Option type='small' title='LOGIN' />
             </button>
-        </DashboardLayoutPage>
+        </CommonLayoutPage>
     );
 };

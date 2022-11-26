@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { AuthenticatedLayout } from '../components/ProtectedLayout/AuthenticatedLayout';
+import { WebLayout } from '../components/ProtectedLayout/WebLayout';
 import { ProtectedLayout } from '../components/ProtectedLayout/ProtectedLayout';
 import { SettingsBlock } from '../elements/Settings/SettingsBlock';
 import { SettingsMain } from '../elements/Settings/SettingsMain';
@@ -20,17 +20,17 @@ export function Router() {
                 <Route
                     path='login'
                     element={
-                        <AuthenticatedLayout>
+                        <WebLayout>
                             <LoginPage />
-                        </AuthenticatedLayout>
+                        </WebLayout>
                     }
                 />
                 <Route
                     path='register'
                     element={
-                        <ProtectedLayout>
+                        <WebLayout>
                             <RegisterPage />
-                        </ProtectedLayout>
+                        </WebLayout>
                     }
                 />
                 <Route
