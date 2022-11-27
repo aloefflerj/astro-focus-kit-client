@@ -23,6 +23,33 @@
     margin-right: 12px;
 }
 
+.timersContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.timersList {
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.timersWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 8px;
+    margin-right: 12px;
+}
+
+.timerInputWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .header {
     width: 100%;
     margin: 32px 0 24px 0;

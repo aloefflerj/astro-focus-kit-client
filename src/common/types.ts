@@ -65,3 +65,8 @@ export interface IReason {
     reasonDateTime: string;
     site: string;
 }
+
+export interface ITimer {
+    id: string;
+    time: number;
+}

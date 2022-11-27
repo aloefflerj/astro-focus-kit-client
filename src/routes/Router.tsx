@@ -11,6 +11,7 @@ import { MetricsPage } from '../pages/Metrics/MetricsPage';
 import { RegisterPage } from '../pages/RegisterPage';
 import { SettingsPage } from '../pages/SettingsPage/SettingsPage';
 import { TasksPage } from '../pages/TasksPage';
+import { SettingsTimer } from '../elements/Settings/SettingsTimer';
 
 export function Router() {
     return (
@@ -85,6 +86,7 @@ export function Router() {
                 >
                     <Route path='' element={<SettingsMain />} />
                     <Route path='blocked-sites' element={<SettingsBlock />} />
+                    <Route path='timer' element={<SettingsTimer />} />
                 </Route>
                 <Route
                     path='note'
